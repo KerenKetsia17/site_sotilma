@@ -196,9 +196,6 @@ export default function PanierPage() {
               </a>
             </div>
 
-            <p className="text-[10px] text-center mt-4" style={{ color: TEXT_M }}>
-              Paiement sécurisé · Livraison au Sénégal
-            </p>
           </motion.div>
 
         </div>

@@ -33,6 +33,11 @@ const nextConfig: NextConfig = {
         hostname: "previews.123rf.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "aesie.net",
+        pathname: "/**",
+      },
     ],
   },
 };

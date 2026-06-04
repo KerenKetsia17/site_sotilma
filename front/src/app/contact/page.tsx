@@ -22,9 +22,9 @@ const contacts = [
     desc:  "Écrivez-nous directement",
   },
   {
-    label: "Support client",
-    value: "+221 77 098 22 90",
-    href:  "tel:+221770982290",
+    label: "Appel téléphonique",
+    value: "+221 77 674 09 24 / +221 78 155 94 16",
+    href:  "tel:+221776740924",
     icon:  "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z",
     desc:  "",
   },
@@ -80,9 +80,6 @@ export default function ContactPage() {
             <p className="text-[10px] font-medium tracking-[0.35em] uppercase mb-3" style={{ color: BLUE }}>
               CONTACTEZ-NOUS
             </p>
-            <h1 className="font-normal leading-tight mb-3" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)", color: TEXT_D }}>
-              Laissez-nous un <span style={{ color: BLUE }}>message</span>
-            </h1>
             <div className="mx-auto" style={{ width: 44, height: 3, backgroundColor: BLUE, borderRadius: 4 }} />
           </motion.div>
 

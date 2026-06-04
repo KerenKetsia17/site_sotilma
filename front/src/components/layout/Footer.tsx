@@ -97,7 +97,15 @@ export default function Footer() {
               <FooterHeading>Contact</FooterHeading>
               <div className="space-y-3 text-sm" style={{ color: TEXT_M }}>
                 <p>Keur Massar, Dakar — Sénégal</p>
-                <a href="tel:+221770982290"
+                <a href="tel:+221776740924"
+                  className="block hover:text-blue-600 transition-colors duration-200">
+                  +221 77 674 09 24
+                </a>
+                <a href="tel:+221781559416"
+                  className="block hover:text-blue-600 transition-colors duration-200">
+                  +221 78 155 94 16
+                </a>
+                <a href="https://wa.me/221770982290" target="_blank" rel="noopener noreferrer"
                   className="block hover:text-blue-600 transition-colors duration-200">
                   +221 77 098 22 90
                 </a>

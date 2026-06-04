@@ -43,7 +43,7 @@ function SectionHeading({
   );
 }
 
-/* ─── Boutons pill ────────────────────────────────────── */
+/* ─── Boutons ────────────────────────────────────── */
 function Btn({ href, children, variant = "solid" }: {
   href: string; children: React.ReactNode; variant?: "solid" | "outline" | "white";
 }) {
@@ -158,10 +158,15 @@ function HeroText() {
         </motion.div>
         <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.6, delay: 0.45 }}
           style={{ width: 48, height: 2, backgroundColor: "#FFF", borderRadius: 2, margin: "10px auto" }} />
-        <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
+        <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
+          className="mb-3 max-w-2xl mx-auto font-semibold"
+          style={{ fontSize: "clamp(1.4rem, 3.2vw, 2.4rem)", color: "#FFFFFF", lineHeight: 1.25, letterSpacing: "-0.01em" }}>
+          Automatisez votre exploitation agricole grâce à l&apos;énergie solaire et au contrôle à distance
+        </motion.h1>
+        <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }}
           className="mb-6 max-w-lg mx-auto"
           style={{ fontSize: "1rem", color: "rgba(255,255,255,0.78)", lineHeight: 1.7 }}>
-          Votre allié pour gérer automatiquement votre champ sans effort, depuis n&apos;importe où.
+          Surveillance, irrigation et pompage intelligents pour les agriculteurs africains.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-wrap items-center justify-center gap-4">
@@ -186,9 +191,9 @@ function HeroText() {
 }
 
 /* ══════════════════════════════════════════════════════
-   2. NOS SOLUTIONS — grille 3 cartes style Solari section 2
+   3. NOS SOLUTIONS — grille 3 cartes style Solari section 2
 ══════════════════════════════════════════════════════ */
-const CAMERA_SLIDES = ["/camera-slide-1.jpg", "/camera-slide-2.jpg"];
+const CAMERA_SLIDES = ["/c2.png", "/camera V2.png"];
 const VANNE_SLIDES = [
   "https://static.wixstatic.com/media/75ad33_0bfea267808b4dc0b1cb3a376674b5b3~mv2.png/v1/fill/w_748,h_780,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_0bfea267808b4dc0b1cb3a376674b5b3~mv2.png",
   "https://static.wixstatic.com/media/75ad33_d3b8626a84fc4e0cad8f3e38a2cf871d~mv2.png/v1/fill/w_749,h_852,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_d3b8626a84fc4e0cad8f3e38a2cf871d~mv2.png",
@@ -197,10 +202,7 @@ const VANNE_SLIDES = [
   "https://static.wixstatic.com/media/75ad33_460bf654f01c4839ab8df296a9196153~mv2.png/v1/fill/w_748,h_780,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_460bf654f01c4839ab8df296a9196153~mv2.png",
 ];
 const ARROSEUR_SLIDES = [
-  "https://static.wixstatic.com/media/75ad33_96d249a4714640d39ac9a456cc6aaa83~mv2.png/v1/fill/w_748,h_785,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_96d249a4714640d39ac9a456cc6aaa83~mv2.png",
-  "https://static.wixstatic.com/media/75ad33_92a71e1e369b4fbcaece634d9f1fa756~mv2.png/v1/fill/w_748,h_785,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_92a71e1e369b4fbcaece634d9f1fa756~mv2.png",
-  "https://static.wixstatic.com/media/75ad33_9a1c9a63416d4e1f9a953d1f1c34bb0e~mv2.png/v1/fill/w_748,h_785,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_9a1c9a63416d4e1f9a953d1f1c34bb0e~mv2.png",
-  "https://static.wixstatic.com/media/75ad33_aa5047129fab44c3a03ff8fe8b12a3ac~mv2.png/v1/fill/w_748,h_785,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_aa5047129fab44c3a03ff8fe8b12a3ac~mv2.png",
+  "https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png",
 ];
 
 function SolutionsGrid() {
@@ -209,77 +211,122 @@ function SolutionsGrid() {
   const [vanneIdx,    setVanneIdx]    = useState(0);
   const [arroseurIdx, setArroseurIdx] = useState(0);
   const [camIdx,      setCamIdx]      = useState(0);
+  const [lightboxSrc, setLightboxSrc] = useState("");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [v2Idx, setV2Idx] = useState(0);
+
+  const v2Slides = ["/camera V2.png", "/images.jfif"];
 
   useEffect(() => {
     const t1 = setInterval(() => setVanneIdx((i)    => (i + 1) % VANNE_SLIDES.length),    3000);
     const t2 = setInterval(() => setArroseurIdx((i) => (i + 1) % ARROSEUR_SLIDES.length), 2800);
     const t3 = setInterval(() => setCamIdx((i)      => (i + 1) % CAMERA_SLIDES.length),   3500);
-    return () => { clearInterval(t1); clearInterval(t2); clearInterval(t3); };
-  }, []);
+    const t4 = setInterval(() => setV2Idx((i)       => (i + 1) % v2Slides.length),        3200);
+    return () => { clearInterval(t1); clearInterval(t2); clearInterval(t3); clearInterval(t4); };
+  }, [v2Slides.length]);
 
   const solutions = [
-    { href: "/boutique?categorie=vanne",      label: "Vannes connectées",  sub: "Irrigation automatique & pilotable",     slides: VANNE_SLIDES,    activeIdx: vanneIdx    },
-    { href: "/boutique?categorie=irrigation", label: "Arroseur Auto 4G",   sub: "Goutte-à-goutte & aspersion pilotables", slides: ARROSEUR_SLIDES, activeIdx: arroseurIdx },
     { href: "/boutique?categorie=camera",     label: "Caméra Agricole",    sub: "Surveillance 24/7 de vos cultures",      slides: CAMERA_SLIDES,   activeIdx: camIdx      },
+    { href: "/boutique?categorie=irrigation", label: "Pompe Mobile",        sub: "Système de pompage solaire mobile haute performance pour une agriculture intelligente.", slides: ARROSEUR_SLIDES, activeIdx: arroseurIdx },
+    { href: "/boutique?categorie=vanne",      label: "Vannes connectées",  sub: "Ouvrez et fermez vos vannes à distance, programmez vos arrosages, mesurez votre consommation d'eau. Irrigation automatique.", slides: VANNE_SLIDES,    activeIdx: vanneIdx    },
+  ];
+
+  const v1Feats = ["Pilotable via téléphone","Motorisée 360°","100 % solaire","SIM 4G","Vision nocturne","Garantie 6 mois"];
+  const v2Feats = ["Pilotable avec votre téléphone","Caméra motorisée 360°","Sécurité renforcée","Fonctionne en 100 % solaire","Supporte la carte SIM 4G","Haut-parleurs et micros intégrés","Vision nocturne","Couverture 0 – 1 hectare","Garantie 6 mois"];
+
+  const staticProducts = [
+    { label: "Pompe\nMobile",      sub: "Pompage solaire haute performance",  img: "https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png", contain: true, href: "/boutique?categorie=irrigation" },
+    { label: "Vannes\nConnectées", sub: "Irrigation automatique & pilotable", img: "https://static.wixstatic.com/media/75ad33_0bfea267808b4dc0b1cb3a376674b5b3~mv2.png/v1/fill/w_748,h_780,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_0bfea267808b4dc0b1cb3a376674b5b3~mv2.png", contain: true, href: "/boutique?categorie=vanne"      },
+  ];
+
+  const camCarousel = [
+    { img: "/c2.png",        label: "Caméra\nAgricole V1" },
+    { img: "/camera V2.png", label: "Caméra\nAgricole V2" },
   ];
 
   return (
-    <section ref={ref} className="py-8 bg-white" style={{ borderTop: "1px solid #E8ECF1" }}>
+    <section ref={ref} className="py-8" style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
       <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}>
-          <SectionHeading label="Nos Solutions" title="Des produits pensés pour l'Afrique"
-            subtitle="Chaque solution est conçue pour fonctionner sans électricité, dans les zones les plus reculées." />
-        </motion.div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {solutions.map((s, i) => (
-            <motion.div key={s.label}
-              initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: i * 0.12 }}>
-              <Link href={s.href} className="group block">
-                <div className="relative rounded-xl overflow-hidden mb-3"
-                  style={{ aspectRatio: "4/3", boxShadow: "0 2px 16px rgba(0,0,0,0.08)", backgroundColor: BGLIGHT, border: "1px solid #E8ECF1" }}>
 
-                  <AnimatePresence mode="sync">
-                    <motion.div
-                      key={s.activeIdx}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.9, ease: "easeInOut" }}
-                      className="absolute inset-0"
-                    >
-                      <Image src={s.slides[s.activeIdx]} alt={s.label} fill
-                        className="object-contain p-2 transition-transform duration-700 group-hover:scale-[1.05]"
-                        sizes="480px" />
+        {/* Titre */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}
+          className="text-center mb-12">
+          <p className="text-xs font-medium tracking-[0.28em] uppercase mb-3" style={{ color: BLUE }}>Nos Solutions</p>
+          <h2 className="font-normal leading-tight mb-2" style={{ fontSize: "clamp(1.9rem, 4.2vw, 3.2rem)", letterSpacing: "-0.02em", color: DARK }}>
+            Des produits pensés pour l&apos;Afrique
+          </h2>
+          <div className="mx-auto mb-4" style={{ width: 52, height: 3, borderRadius: 2, backgroundColor: BLUE }} />
+          <p style={{ color: MID, fontSize: "1rem" }}>Chaque solution est conçue pour fonctionner sans électricité, dans les zones les plus reculées.</p>
+        </motion.div>
+
+        {/* ── Grille 3 cards ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-14">
+
+          {/* Caméra — carrousel V1/V2 */}
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.55 }}
+            className="flex flex-col items-center">
+            <Link href="/boutique?categorie=camera" className="group flex flex-col items-center">
+              <div className="mb-3 transition-transform duration-300 group-hover:scale-105 relative"
+                style={{ background: "#CBD5E1", padding: 1, borderRadius: 12 }}>
+                <div className="w-56 h-56 overflow-hidden relative"
+                  style={{ backgroundColor: "#FFF", borderRadius: 10 }}>
+                  <AnimatePresence mode="wait">
+                    <motion.div key={camIdx} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6 }} className="absolute inset-0">
+                      <Image src={camCarousel[camIdx].img} alt={camCarousel[camIdx].label} fill
+                        className="object-contain p-3" sizes="240px" />
                     </motion.div>
                   </AnimatePresence>
+                  {/* Dots */}
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-10">
+                    {camCarousel.map((_, i) => (
+                      <div key={i} className="rounded-full transition-all duration-300"
+                        style={{ width: i === camIdx ? 14 : 5, height: 5, backgroundColor: i === camIdx ? BLUE : "#CBD5E1" }} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <h3 className="font-bold text-center uppercase leading-tight"
+                style={{ fontSize: "0.75rem", color: DARK, letterSpacing: "0.04em", whiteSpace: "pre-line" }}>
+                {camCarousel[camIdx].label}
+              </h3>
+              <p className="text-center mt-0.5" style={{ fontSize: "0.62rem", color: MID }}>Surveillance 24/7</p>
+            </Link>
+          </motion.div>
 
-                  {/* Indicateurs dots pour le slideshow */}
-                  {s.slides && (
-                    <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
-                      {s.slides.map((_, di) => (
-                        <div key={di} className="rounded-full transition-all duration-300"
-                          style={{ width: di === s.activeIdx ? 16 : 6, height: 6, backgroundColor: di === s.activeIdx ? "#fff" : "rgba(255,255,255,0.5)" }} />
-                      ))}
+          {/* Pompe + Vannes */}
+          {staticProducts.map((p, i) => (
+            <motion.div key={p.label}
+              initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55, delay: (i + 1) * 0.1 }}
+              className="flex flex-col items-center">
+              <Link href={p.href} className="group flex flex-col items-center">
+                <div className="mb-3 transition-transform duration-300 group-hover:scale-105"
+                  style={{ background: "#CBD5E1", padding: 1, borderRadius: 12 }}>
+                  <div className="w-56 h-56 flex items-center justify-center overflow-hidden"
+                    style={{ backgroundColor: "#FFF", borderRadius: 10 }}>
+                    <div className="relative w-full h-full">
+                      <Image src={p.img} alt={p.label} fill
+                        className={p.contain ? "object-contain p-3" : "object-cover"} sizes="240px" />
                     </div>
-                  )}
-
-                  <div className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
-                    style={{ background: "rgba(30,114,184,0.07)" }} />
+                  </div>
                 </div>
-                <div className="text-center px-2">
-                  <h3 className="font-medium mb-0.5 transition-colors duration-200 group-hover:text-[#1E72B8]"
-                    style={{ fontSize: "0.78rem", color: DARK }}>{s.label}</h3>
-                  <p style={{ fontSize: "0.68rem", color: MID }}>{s.sub}</p>
-                </div>
+                <h3 className="font-bold text-center uppercase leading-tight"
+                  style={{ fontSize: "0.75rem", color: DARK, letterSpacing: "0.04em", whiteSpace: "pre-line" }}>
+                  {p.label}
+                </h3>
+                <p className="text-center mt-0.5" style={{ fontSize: "0.62rem", color: MID }}>{p.sub}</p>
               </Link>
             </motion.div>
           ))}
+
         </div>
-        <div className="flex justify-center mt-10">
-          <Btn href="/boutique">Voir tous les produits</Btn>
-        </div>
+
+
       </div>
+
+      <Lightbox src={lightboxSrc} alt={lightboxSrc} isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
     </section>
   );
 }
@@ -292,6 +339,8 @@ function SolutionsGrid() {
 function DesignedForYou() {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const COLORS = ["#1E72B8", "#E67E22", "#1A9E3F", "#8B5CF6"];
 
   const features = [
     {
@@ -353,43 +402,35 @@ function DesignedForYou() {
   ];
 
   return (
-    <section ref={ref} style={{ backgroundColor: BGLIGHT, borderTop: "1px solid #E8ECF1" }}>
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-10">
+    <section ref={ref} style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-10">
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}>
           <SectionHeading
             label="Pourquoi Sotilma"
-            title="Conçu pour vous"
+            title=""
             subtitle="Sotilma offre une gamme de solutions adaptées à chaque type d'exploitation agricole."
           />
         </motion.div>
 
-        {/* 4 cartes style "Designed for you" Solari */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-4">
           {features.map((f, i) => (
             <motion.div key={f.label}
               initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white rounded-2xl p-7 hover:-translate-y-1 transition-all duration-300"
-              style={{ border: "1px solid #E0E8F0", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
+              transition={{ duration: 0.55, delay: i * 0.1 }}
+              className="bg-white rounded-2xl p-6 flex flex-col"
+              style={{ border: `1px solid ${COLORS[i]}33`, boxShadow: `0 4px 20px ${COLORS[i]}18`, borderTop: `3px solid ${COLORS[i]}` }}>
 
-              {/* Icône outline — accent couleur */}
-              <div style={{ color: BLUE }}>{f.icon}</div>
-
-              {/* Séparateur court gris */}
-              <div style={{ width: 36, height: 1, backgroundColor: "#CDD6E0", margin: "18px 0 14px" }} />
-
-              {/* Numéro + label en small caps */}
-              <p className="font-medium tracking-[0.15em] uppercase mb-2"
-                style={{ fontSize: "0.72rem", color: DARK }}>
-                <span style={{ color: BLUE }}>{f.num}.&nbsp; </span>{f.label}
+              {/* Titre */}
+              <p className="font-semibold mb-2" style={{ fontSize: "0.88rem", color: DARK }}>
+                {f.label}
               </p>
 
-              {/* Séparateur court gris */}
-              <div style={{ width: 28, height: 1, backgroundColor: "#CDD6E0", margin: "10px 0 14px" }} />
-
               {/* Description */}
-              <p className="text-sm leading-relaxed" style={{ color: MID, lineHeight: 1.75 }}>{f.desc}</p>
+              <p style={{ fontSize: "0.76rem", color: MID, lineHeight: 1.75 }}>
+                {f.desc}
+              </p>
+
             </motion.div>
           ))}
         </div>
@@ -422,242 +463,229 @@ function FullWidthImage() {
    Grille 3 cols plein bord : texte | image | texte
 ══════════════════════════════════════════════════════ */
 function MobileHero() {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const src    = "https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png";
+
+  const steps = [
+    {
+      num: "01",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5">
+          <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="6" x2="15" y2="6"/><circle cx="12" cy="17" r="1"/>
+        </svg>
+      ),
+      label: "Téléchargez l'application",
+      desc: "Disponible gratuitement sur Android et iOS. Créez votre compte agriculteur en quelques secondes.",
+      color: BLUE,
+    },
+    {
+      num: "02",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      ),
+      label: "Connectez vos équipements",
+      desc: "Associez vos pompes, vannes, caméras et compteurs Sotilma en scannant leur QR code.",
+      color: "#1A9E5F",
+    },
+    {
+      num: "03",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>
+        </svg>
+      ),
+      label: "Surveillez en temps réel",
+      desc: "Accédez aux données live de vos champs — consommation d'eau, état des cultures, vidéo en direct.",
+      color: "#E67E22",
+    },
+    {
+      num: "04",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5">
+          <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+        </svg>
+      ),
+      label: "Pilotez à distance",
+      desc: "Déclenchez l'arrosage, fermez une vanne, activez une alerte — depuis n'importe où en Afrique.",
+      color: BLUE,
+    },
+  ];
+
+  const screens = [
+    { src: "/Capture_d_écran_2026-06-03_132348-removebg-preview.png", rotate: 0 },
+  ];
+
+  const [activeScreen, setActiveScreen] = useState(0);
+  const nS = screens.length;
+
+  useEffect(() => {
+    const t = setInterval(() => setActiveScreen(i => (i + 1) % nS), 3500);
+    return () => clearInterval(t);
+  }, [nS]);
+
+  const getScreenAnim = (pos: number) => {
+    if (pos === 0)      return { x: 0,    scale: 1,    opacity: 1,    zIndex: 10 };
+    if (pos === 1)      return { x: 210,  scale: 0.86, opacity: 0.6,  zIndex: 5  };
+    if (pos === nS - 1) return { x: -210, scale: 0.86, opacity: 0.6,  zIndex: 5  };
+    return                { x: 0,    scale: 0.7,  opacity: 0,    zIndex: 1  };
+  };
 
   return (
-    <>
-      <section ref={ref} style={{ backgroundColor: "white", borderTop: "1px solid #E8ECF1" }}>
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-10">
+    <section ref={ref} style={{ backgroundColor: "white", borderTop: "1px solid #E8ECF1" }}>
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-10">
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}>
-            <SectionHeading
-              label="Pompage solaire mobile"
-              title="Sotilma Mobile"
-              subtitle="Système de pompage solaire mobile haute performance pour une agriculture intelligente."
-            />
+        {/* En-tête centré */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}
+          className="text-center mb-8">
+          <p className="text-xs font-medium tracking-[0.28em] uppercase mb-2" style={{ color: BLUE }}>Application mobile</p>
+          <div className="mx-auto" style={{ width: 40, height: 2, borderRadius: 2, backgroundColor: BLUE, margin: "8px auto 14px" }} />
+          <p className="mx-auto max-w-lg" style={{ fontSize: "0.85rem", color: MID, lineHeight: 1.7 }}>
+            L&apos;application centrale pour connecter, surveiller et piloter l&apos;ensemble de vos équipements agricoles Sotilma — depuis votre smartphone, partout en Afrique.
+          </p>
+        </motion.div>
+
+        {/* Corps : processus à gauche, screenshot à droite */}
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+
+          {/* Schéma de processus */}
+          <motion.div initial={{ opacity: 0, x: -24 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7, delay: 0.15 }}>
+            <div className="flex flex-col gap-0">
+              {steps.map((s, i) => (
+                <motion.div key={s.num}
+                  initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
+                  className="flex gap-3 items-stretch">
+                  <div className="flex flex-col items-center" style={{ minWidth: 32 }}>
+                    <div className="flex items-center justify-center rounded-full w-8 h-8 shrink-0"
+                      style={{ backgroundColor: s.color, color: "#FFF", fontSize: "0.62rem", fontWeight: 700 }}>
+                      {s.num}
+                    </div>
+                    {i < steps.length - 1 && (
+                      <div className="flex-1 w-px my-1" style={{ backgroundColor: "#E8ECF1", minHeight: 20 }} />
+                    )}
+                  </div>
+                  <div className="pb-4">
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <span style={{ color: s.color, fontSize: "0.8rem" }}>{s.icon}</span>
+                      <p className="font-semibold" style={{ fontSize: "0.78rem", color: DARK }}>{s.label}</p>
+                    </div>
+                    <p style={{ fontSize: "0.7rem", color: MID, lineHeight: 1.6 }}>{s.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
 
-          {/* Grande image */}
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative cursor-zoom-in overflow-hidden mx-auto"
-            style={{ maxWidth: "800px", aspectRatio: "16/9" }}
-            onClick={() => setLightboxOpen(true)}>
-            <Image src={src} alt="Sotilma Mobile" fill
-              className="object-cover transition-transform duration-700 hover:scale-[1.02]" sizes="800px" />
-          </motion.div>
-
-          {/* Bouton */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-center mt-8">
-            <Btn href="/boutique?categorie=pompe">Commander</Btn>
+          {/* Image app */}
+          <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex justify-center items-center">
+            <div className="relative" style={{ width: "70%", maxWidth: 280, aspectRatio: "1/1" }}>
+              <Image src={screens[0].src} alt="Sotilma Mobile" fill className="object-contain" sizes="300px" />
+            </div>
           </motion.div>
 
         </div>
-      </section>
-      <Lightbox src={src} alt="Sotilma Mobile" isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
-    </>
-  );
-}
-
-/* ══════════════════════════════════════════════════════
-   5. VANNE SOTILMA — style Solari : image | texte | image
-══════════════════════════════════════════════════════ */
-function SmartValvesSection() {
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const imgs   = [
-    { src: "https://static.wixstatic.com/media/75ad33_82b826c91cd44c88954123ab55cbc531~mv2.jpg/v1/fill/w_446,h_544,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_82b826c91cd44c88954123ab55cbc531~mv2.jpg", alt: "Vanne Sotilma 1" },
-    { src: "https://static.wixstatic.com/media/75ad33_8f29c3e714694a9d89307d3c5dbd8847~mv2.jpg/v1/fill/w_446,h_586,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Capture%20d%E2%80%99%C3%A9cran%2C%20le%202024-09-20%20%C3%A0%2018_43_e.jpg", alt: "Vanne Sotilma 2" },
-  ];
-
-  return (
-    <section ref={ref} className="overflow-hidden" style={{ backgroundColor: "white", borderTop: "1px solid #E8ECF1" }}>
-      <div className="grid lg:grid-cols-3" style={{ minHeight: 460 }}>
-
-        {/* Col 1 — image gauche */}
-        <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="relative hidden lg:block" style={{ borderRight: "1px solid #E8ECF1" }}>
-          <Image src={imgs[0].src} alt={imgs[0].alt} fill className="object-contain p-8" sizes="400px" />
-        </motion.div>
-
-        {/* Col 2 — texte centré */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="flex flex-col items-center justify-center text-center px-10 py-10"
-          style={{ borderRight: "1px solid #E8ECF1" }}>
-          <p className="text-xs tracking-[0.28em] uppercase mb-3" style={{ color: BLUE }}>SOTILMA</p>
-          <h2 className="font-normal mb-0" style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)", color: DARK, letterSpacing: "-0.01em" }}>
-            Vanne Sotilma
-          </h2>
-          <div style={{ width: 36, height: 2, backgroundColor: BLUE, borderRadius: 1, margin: "14px auto" }} />
-          <p className="text-sm mb-2" style={{ color: DARK, lineHeight: 1.8 }}>
-            Ouvrez et fermez vos vannes à distance, programmez vos arrosages, mesurez votre consommation d&apos;eau.{" "}
-            <span style={{ color: BLUE }}>Irrigation automatique.</span>
-          </p>
-          <p className="text-sm mb-6" style={{ color: MID, lineHeight: 1.8 }}>
-            Sotilma, la solution qui vous permet de gérer automatiquement et à distance votre irrigation.
-          </p>
-          <Btn href="/boutique?categorie=vanne-automatique">Voir la boutique</Btn>
-        </motion.div>
-
-        {/* Col 3 — image droite statique */}
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="relative" style={{ minHeight: 400 }}>
-          <Image src={imgs[1].src} alt={imgs[1].alt} fill className="object-contain p-8" sizes="480px" />
-        </motion.div>
 
       </div>
     </section>
   );
 }
 
+
 /* ══════════════════════════════════════════════════════
    6. SURVEILLANCE — même style que Pourquoi Sotilma + images caméras
 ══════════════════════════════════════════════════════ */
 function SurveillanceSection() {
-  const [idx, setIdx] = useState(0);
+  const [v1Idx, setV1Idx]             = useState(0);
+  const [lightboxSrc, setLightboxSrc] = useState("");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const imgs   = [
-    { src: "/camera-produit.jpg", alt: "Caméra solaire Sotilma" },
-    { src: "/QT-02T图三.png",      alt: "Caméra Sotilma vue 2"   },
-    { src: "/QT-02T图五.png",      alt: "Caméra Sotilma vue 3"   },
-    { src: "/QT-02T图六.png",      alt: "Caméra Sotilma vue 4"   },
+
+  const v1Slides = [
+    "/c2.png",
+    "/WhatsApp Image 2025-01-26 at 19.05.52.jpeg",
+    "/camera-agricole-2.jpg",
   ];
-  useEffect(() => {
-    const t = setInterval(() => setIdx((p) => (p + 1) % imgs.length), 3500);
-    return () => clearInterval(t);
-  }, [imgs.length]);
 
   const features = [
-    {
-      num: "01",
-      label: "Vision 24/7",
-      desc:  "Surveillance continue de vos cultures jour et nuit avec vision infrarouge.",
-      icon: (
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-11 h-11">
-          <circle cx="24" cy="24" r="18"/>
-          <circle cx="24" cy="24" r="6"/>
-          <circle cx="24" cy="24" r="2" fill="currentColor"/>
-        </svg>
-      ),
-    },
-    {
-      num: "02",
-      label: "Alertes instantanées",
-      desc:  "Notifications en temps réel sur votre smartphone en cas d'anomalie détectée.",
-      icon: (
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-11 h-11">
-          <path d="M24 4L4 24h10v18h20V24h10L24 4z"/>
-          <circle cx="24" cy="32" r="4" fill="currentColor"/>
-        </svg>
-      ),
-    },
-    {
-      num: "03",
-      label: "100% solaire",
-      desc:  "Alimentation autonome par énergie solaire. Fonctionne sans électricité.",
-      icon: (
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-11 h-11">
-          <circle cx="24" cy="24" r="10"/>
-          <path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l4 4M10 34l4-4M34 10l4-4"/>
-          <circle cx="24" cy="24" r="4" fill="currentColor"/>
-        </svg>
-      ),
-    },
-    {
-      num: "04",
-      label: "Stockage cloud",
-      desc:  "Enregistrement et accès sécurisé à vos images depuis n'importe où.",
-      icon: (
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-11 h-11">
-          <path d="M4 16c0-4 4-8 8-8 0-6 6-10 12-10s12 4 12 10c4 0 8 4 8 8v16c0 4-4 8-8 8H12c-4 0-8-4-8-8V16z"/>
-          <path d="M24 28v8M20 36h8"/>
-        </svg>
-      ),
-    },
+    "Pilotable avec votre téléphone",
+    "Caméra motorisée 360°",
+    "Sécurité renforcée",
+    "Fonctionne en 100 % solaire",
+    "Supporte la carte SIM 4G",
+    "Haut-parleurs et micros intégrés",
+    "Vision nocturne",
+    "Couverture 0 – 1 hectare",
+    "Garantie 6 mois",
   ];
 
+  useEffect(() => {
+    const t = setInterval(() => setV1Idx(p => (p + 1) % v1Slides.length), 3000);
+    return () => clearInterval(t);
+  }, [v1Slides.length]);
+
   return (
-    <section ref={ref} style={{ backgroundColor: BGLIGHT, borderTop: "1px solid #E8ECF1" }}>
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-10">
+    <section ref={ref} className="py-8" style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16">
 
-      
+        {/* Titre */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}
+          className="text-center mb-12">
+          <h2 className="font-normal mb-3" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", letterSpacing: "-0.02em", color: DARK }}>
+            Nos caméras
+          </h2>
+          <div className="mx-auto" style={{ width: 52, height: 3, borderRadius: 2, backgroundColor: BLUE }} />
+        </motion.div>
 
-        {/* 4 cartes style "Designed for you" Solari */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          {features.map((f, i) => (
-            <motion.div key={f.label}
-              initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white rounded-2xl p-7 hover:-translate-y-1 transition-all duration-300"
-              style={{ border: "1px solid #E0E8F0", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
+        {/* 2 fiches côte à côte */}
+        <div className="grid sm:grid-cols-2 gap-8">
 
-              {/* Icône outline — accent couleur */}
-              <div style={{ color: BLUE }}>{f.icon}</div>
+          {/* ── V1 ── */}
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="relative rounded-2xl overflow-hidden cursor-zoom-in group"
+            style={{ aspectRatio: "4/3", boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}>
 
-              {/* Séparateur court gris */}
-              <div style={{ width: 36, height: 1, backgroundColor: "#CDD6E0", margin: "18px 0 14px" }} />
-
-              {/* Numéro + label en small caps */}
-              <p className="font-medium tracking-[0.15em] uppercase mb-2"
-                style={{ fontSize: "0.72rem", color: DARK }}>
-                <span style={{ color: BLUE }}>{f.num}.&nbsp; </span>{f.label}
-              </p>
-
-              {/* Séparateur court gris */}
-              <div style={{ width: 28, height: 1, backgroundColor: "#CDD6E0", margin: "10px 0 14px" }} />
-
-              {/* Description */}
-              <p className="text-sm leading-relaxed" style={{ color: MID, lineHeight: 1.75 }}>{f.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Section images caméras avec carrousel */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Col 1 — texte */}
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7 }}
-            className="flex flex-col justify-center">
-            <h2 className="font-normal mb-0" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: DARK, letterSpacing: "-0.02em" }}>
-              Découvrez notre <span style={{ color: BLUE }}>caméra solaire</span>
-            </h2>
-            <div style={{ width: 52, height: 3, backgroundColor: BLUE, borderRadius: 2, margin: "16px 0 24px" }} />
-            <p className="text-base mb-6" style={{ color: MID, lineHeight: 1.85 }}>
-              Notre caméra agricole connectée offre une surveillance HD 24h/24, alimentée 100% par énergie solaire avec alertes instantanées et stockage cloud sécurisé.
-            </p>
-            <div className="flex gap-2 mb-8">
-              {imgs.map((_, i) => (
-                <button key={i} onClick={() => setIdx(i)}
-                  className="rounded-full transition-all duration-300"
-                  style={{ width: idx === i ? 32 : 10, height: 10, backgroundColor: idx === i ? BLUE : "#D0D8E4" }} />
-              ))}
-            </div>
-            <Btn href="/boutique">Découvrir la caméra</Btn>
-          </motion.div>
-
-          {/* Col 2 — image principale avec carrousel */}
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="relative"
-            style={{ aspectRatio: "4/3", overflow: "hidden" }}>
             <AnimatePresence mode="wait">
-              <motion.div key={idx} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                transition={{ duration: 0.6 }} className="absolute inset-0">
-                <Image src={imgs[idx].src} alt={imgs[idx].alt} fill className="object-cover" sizes="800px" />
+              <motion.div key={v1Idx} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }} className="absolute inset-0"
+                onClick={() => { setLightboxSrc(v1Slides[v1Idx]); setLightboxOpen(true); }}>
+                <Image src={v1Slides[v1Idx]} alt="Caméra V1" fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="500px" />
               </motion.div>
             </AnimatePresence>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 pointer-events-none"
+              style={{ background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)" }}>
+              <span className="text-white text-sm font-semibold">Caméra V1</span>
+            </div>
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+              {v1Slides.map((_, i) => (
+                <button key={i} onClick={e => { e.stopPropagation(); setV1Idx(i); }}
+                  className="rounded-full transition-all duration-300"
+                  style={{ width: i === v1Idx ? 16 : 6, height: 6, backgroundColor: i === v1Idx ? "#FFF" : "rgba(255,255,255,0.5)" }} />
+              ))}
+            </div>
           </motion.div>
-        </div>
 
+          {/* ── V2 ── */}
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative rounded-2xl overflow-hidden cursor-zoom-in group"
+            style={{ aspectRatio: "4/3", boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}
+            onClick={() => { setLightboxSrc("/camera-agricole-1.jpg"); setLightboxOpen(true); }}>
+            <Image src="/camera-agricole-1.jpg" alt="Caméra V2" fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="500px" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4"
+              style={{ background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)" }}>
+              <span className="text-white text-sm font-semibold">Caméra V2</span>
+            </div>
+          </motion.div>
+
+        </div>
       </div>
+
+      <Lightbox src={lightboxSrc} alt={lightboxSrc} isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
     </section>
   );
 }
@@ -732,7 +760,7 @@ function ImageCarousel({ images, label }: { images: string[], label: string }) {
    latérales réduites et décalées derrière
 ══════════════════════════════════════════════════════ */
 function ShowcaseCarousel() {
-  const [active, setActive] = useState(0);
+  const [active, setActive]           = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState("");
   const ref    = useRef(null);
@@ -743,117 +771,97 @@ function ShowcaseCarousel() {
       label: "Vanne Sotilma",
       sub:   "Irrigation connectée & automatique",
       img:   "/PHOTO-2025-01-30-16-11-59 (1).jpg",
-      tag:   "Automatique",
-      href:  "/boutique?categorie=vanne-automatique",
       cover: true,
-    },
-    {
-      label: "Sotilma Mobile",
-      sub:   "Pompage solaire haute performance",
-      img:   "https://static.wixstatic.com/media/75ad33_d6b2d0183e4d4330a41fba9beb5cf680~mv2.png/v1/fill/w_282,h_426,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/image-removebg-preview%20(21).png",
-      tag:   "Solaire",
-      href:  "/boutique?categorie=pompe",
-      cover: false,
     },
     {
       label: "Caméra Agricole",
       sub:   "Surveillance 24/7 de vos cultures",
       img:   "/camera-agricole-1.jpg",
-      tag:   "Connectée",
-      href:  "/boutique?categorie=camera",
+      cover: true,
+    },
+    {
+      label: "Caméra Agricole V1",
+      sub:   "Surveillance 24/7 de vos cultures",
+      img:   "/camera-agricole-2.jpg",
       cover: true,
     },
   ];
 
-  const prev = () => setActive((p) => (p - 1 + slides.length) % slides.length);
-  const next = () => setActive((p) => (p + 1) % slides.length);
+  /* Rotation fixe et permanente de chaque carte */
+  const TILTS = [-8, 8, -6];
 
-  const openLightbox = (slide: any) => {
-    setLightboxImage(slide.img);
-    setLightboxOpen(true);
-  };
-
-  const closeLightbox = () => setLightboxOpen(false);
-
-  // Animation automatique carousel rotatif avec effet de profondeur
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActive((prev) => (prev + 1) % slides.length);
-    }, 3500);
-    return () => clearInterval(interval);
+    const t = setInterval(() => setActive(p => (p + 1) % slides.length), 3800);
+    return () => clearInterval(t);
   }, [slides.length]);
 
-  /* position de chaque carte par rapport à l'active pour effet rotation automatique avec profondeur */
-  function getStyle(i: number): React.CSSProperties {
-    const dist = ((i - active + slides.length) % slides.length + slides.length) % slides.length;
-    const normalized = dist <= slides.length / 2 ? dist : dist - slides.length;
-
-    if (normalized === 0) {
-      // Image au premier plan - taille normale, opacité complète
-      return { transform: "translateX(0) scale(1) translateZ(0)", zIndex: 10, opacity: 1 };
-    }
-    if (Math.abs(normalized) === 1) {
-      // Deuxième plan - légèrement plus petite, opacité réduite
-      const x = normalized * 45;
-      return { transform: `translateX(${x}%) scale(0.90) translateZ(-80px)`, zIndex: 5, opacity: 0.85 };
-    }
-    // Troisième plan et plus - encore plus petite, opacité plus faible
-    const x = normalized * 70;
-    return { transform: `translateX(${x}%) scale(0.80) translateZ(-150px)`, zIndex: 1, opacity: 0.65 };
-  }
+  const getAnim = (i: number) => {
+    const isActive = i === active;
+    const side = i === 0 ? -1 : 1;
+    return {
+      x:       isActive ? 0   : side * 80,
+      y:       isActive ? 0   : 30,
+      scale:   isActive ? 1   : 0.82,
+      opacity: isActive ? 1   : 0.62,
+      zIndex:  isActive ? 10  : 4,
+      rotate:  isActive ? 0   : TILTS[i],
+    };
+  };
 
   return (
-    <section ref={ref} className="bg-white py-10 overflow-hidden" style={{ borderTop: "1px solid #E8ECF1" }}>
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+    <section ref={ref} className="py-8 overflow-hidden" style={{ backgroundColor: "white", borderTop: "1px solid #E8ECF1" }}>
+      <div className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16">
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}>
-          <SectionHeading
-            label="Nos gammes"
-            title=""
-          />
+          <SectionHeading label="Plus d'informations" title="" />
         </motion.div>
 
-        {/* Conteneur carousel rotatif automatique avec effet de profondeur */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative flex items-center justify-center"
-          style={{ perspective: "2000px", height: 700 }}
-        >
-          {slides.map((s, i) => (
-            <div key={s.label}
-              className="absolute w-full max-w-md cursor-pointer transition-all duration-800 ease-in-out"
-              style={getStyle(i)}
-              onClick={() => openLightbox(s)}>
-
-                {/* Mini carte — style Solari */}
-                <div className="rounded-2xl overflow-hidden"
-                  style={{ boxShadow: active === i ? "0 20px 60px rgba(0,0,0,0.15)" : "0 4px 24px rgba(0,0,0,0.08)", border: "1px solid #E8ECF1" }}>
-
-                  {/* Contenu de la carte - image pleine */}
-                  <div className="relative w-full" style={{ aspectRatio: "3/4" }}>
-                    <Image src={s.img} alt={s.label} fill
-                      className={s.cover ? "object-cover" : "object-contain p-6"} sizes="600px" />
-                  </div>
-
-                  {/* Section titre en bas */}
-                  <div className="absolute bottom-0 left-0 right-0 px-5 py-3 bg-gradient-to-t from-black/70 to-transparent">
-                    <p className="font-normal text-white" style={{ fontSize: "1.1rem" }}>{s.label}</p>
+        {/* Carrousel 2 cartes inclinées */}
+        <div className="relative flex justify-center items-center" style={{ height: 600 }}>
+          {slides.map((s, i) => {
+            const anim = getAnim(i);
+            return (
+              <motion.div
+                key={s.label}
+                animate={{ x: anim.x, y: anim.y, scale: anim.scale, opacity: anim.opacity, zIndex: anim.zIndex, rotate: anim.rotate }}
+                transition={{ duration: 0.78, ease: [0.22, 1, 0.36, 1] }}
+                style={{ position: "absolute", width: 380, cursor: "pointer" }}
+                onClick={() => { setActive(i); setLightboxImage(s.img); setLightboxOpen(true); }}
+              >
+                <div className="relative rounded-2xl overflow-hidden"
+                  style={{
+                    aspectRatio: "3/4",
+                    boxShadow: i === active
+                      ? "0 24px 56px rgba(0,0,0,0.22), 0 6px 16px rgba(0,0,0,0.10)"
+                      : "0 6px 20px rgba(0,0,0,0.10)",
+                    border: "1px solid #E8ECF1",
+                    transition: "box-shadow 0.5s",
+                  }}>
+                  <Image src={s.img} alt={s.label} fill
+                    className={s.cover ? "object-cover" : "object-contain p-4"} sizes="260px" />
+                  <div className="absolute bottom-0 left-0 right-0 px-4 py-3">
+                    <p className="font-semibold" style={{ fontSize: "0.9rem", color: DARK }}>{s.label}</p>
+                    <p style={{ fontSize: "0.72rem", color: MID }}>{s.sub}</p>
                   </div>
                 </div>
-            </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Dots */}
+        <div className="flex justify-center gap-2 mt-2">
+          {slides.map((_, i) => (
+            <button key={i} onClick={() => setActive(i)}
+              className="rounded-full transition-all duration-300"
+              style={{ width: i === active ? 22 : 8, height: 8, backgroundColor: i === active ? BLUE : "#CDD6E0" }} />
           ))}
-        </motion.div>
+        </div>
 
       </div>
 
-      {/* Lightbox pour afficher l'image en grand */}
-      <Lightbox
-        src={lightboxImage}
-        alt={lightboxImage ? "Image en grand format" : ""}
-        isOpen={lightboxOpen}
-        onClose={closeLightbox}
-      />
+      <Lightbox src={lightboxImage} alt={lightboxImage ? slides.find(s => s.img === lightboxImage)?.label ?? "" : ""}
+        isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
     </section>
   );
 }
@@ -921,7 +929,7 @@ function FaqSection() {
               transition={{ duration: 0.45, delay: i * 0.08 }}>
 
               {/* Item accordion — style Solari */}
-              <div className="rounded-xl overflow-hidden" style={{ backgroundColor: "#F4F5F7" }}>
+              <div className="rounded-xl overflow-hidden" style={{ backgroundColor: "#F8F9FA", border: "1px solid #E8ECF1" }}>
                 <button
                   className="w-full flex items-center justify-between px-7 py-5 text-left group"
                   onClick={() => setOpen(open === i ? null : i)}>
@@ -962,6 +970,44 @@ function FaqSection() {
 }
 
 
+/* ── CTA FINAL ───────────────────────────────────────── */
+function CtaFinal() {
+  const ref    = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <section ref={ref} style={{ background: `linear-gradient(135deg, #0C2340 0%, ${BLUE} 100%)`, borderTop: "1px solid #E8ECF1" }}>
+      <div className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 py-12 text-center">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}>
+          <p className="text-xs font-medium tracking-[0.28em] uppercase mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
+            Sotilma
+          </p>
+          <h2 className="font-normal leading-tight mb-4 text-white"
+            style={{ fontSize: "clamp(1.9rem, 4.5vw, 3.4rem)", letterSpacing: "-0.02em" }}>
+            Prêt à moderniser<br />votre exploitation&nbsp;?
+          </h2>
+          <div className="mx-auto mb-8" style={{ width: 52, height: 3, borderRadius: 2, backgroundColor: "rgba(255,255,255,0.45)" }} />
+          <p className="mx-auto max-w-lg mb-10" style={{ color: "rgba(255,255,255,0.72)", fontSize: "1rem", lineHeight: 1.85 }}>
+            Rejoignez les agriculteurs africains qui pilotent déjà leur exploitation depuis leur smartphone grâce aux solutions Sotilma.
+          </p>
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.25 }}
+            className="flex flex-wrap justify-center gap-4">
+            <Link href="/contact"
+              className="inline-flex items-center gap-2 font-medium text-sm px-8 py-3.5 rounded-full tracking-wide transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
+              style={{ backgroundColor: "#FFF", color: BLUE }}>
+              Demander un devis
+            </Link>
+            <Link href="/boutique"
+              className="inline-flex items-center gap-2 font-medium text-sm px-8 py-3.5 rounded-full tracking-wide transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
+              style={{ border: "2px solid rgba(255,255,255,0.7)", color: "#FFF" }}>
+              Acheter maintenant
+            </Link>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 /* ── WhatsApp FAB ─────────────────────────────────────── */
 function WhatsAppFab() {
   return (
@@ -977,6 +1023,85 @@ function WhatsAppFab() {
   );
 }
 
+/* ══════════════════════════════════════════════════════
+   POMPE MOBILE — section accueil
+══════════════════════════════════════════════════════ */
+function PompeMobileSection() {
+  const ref    = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+
+  const specs = [
+    { icon: "☀️", label: "Puissance Solaire", value: "1800W" },
+    { icon: "💧", label: "Débit Pompage",      value: "12 – 15 m³/h" },
+    { icon: "🌿", label: "Jusqu'à",            value: "1 – 4 ha · HTM 60 m" },
+  ];
+
+  const offers = [
+    { name: "SmA", tag: "SIMPLE",                         price: "958 000", color: "#1E72B8" },
+    { name: "SmA+", tag: "AVEC CAMÉRA ET COMMANDE",       price: "998 000", color: "#1A9E3F" },
+  ];
+
+  return (
+    <section ref={ref} style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 py-10">
+
+        {/* Header */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}
+          className="text-center mb-8">
+          <h2 className="font-black uppercase leading-none" style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#1E72B8", letterSpacing: "0.02em" }}>
+            Sotilma Mobile
+          </h2>
+          <p className="text-xs font-semibold tracking-[0.28em] uppercase mb-2" style={{ color: "#5A6B7A" }}>
+            Pour ceux qui ont des puits ou forages
+          </p>
+          <p className="font-semibold tracking-[0.18em] uppercase text-xs" style={{ color: "#5A6B7A" }}>
+            Pompage solaire mobile
+          </p>
+        </motion.div>
+
+        {/* Specs */}
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 }}
+          className="flex justify-center gap-0 mb-8 flex-wrap">
+          {specs.map((s, i) => (
+            <div key={s.label} className="flex items-center gap-3 px-6 py-3" style={{ borderRight: i < specs.length - 1 ? "1px solid #DDE6F0" : "none" }}>
+              <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
+              <div>
+                <p className="font-semibold uppercase" style={{ fontSize: "0.65rem", color: "#5A6B7A", letterSpacing: "0.1em" }}>{s.label}</p>
+                <p className="font-black" style={{ fontSize: "0.95rem", color: "#111827" }}>{s.value}</p>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Image produit */}
+        <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={inView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.7, delay: 0.15 }}
+          className="relative mx-auto rounded-2xl overflow-hidden mb-6 cursor-pointer"
+          style={{ width: "55%", aspectRatio: "4/3" }}>
+          <Image
+            src="https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png"
+            alt="Sotilma Mobile — Pompe solaire"
+            fill className="object-contain" sizes="500px" priority />
+        </motion.div>
+
+        {/* Tarifs + CTA */}
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-wrap items-center justify-center gap-4 mt-2">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full" style={{ backgroundColor: "#EEF5FB", border: "1px solid #C8DCF0" }}>
+            <span className="font-black text-sm" style={{ color: "#1E72B8" }}>SmA</span>
+            <span className="font-black text-sm" style={{ color: "#111827" }}>958 000 FCFA</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full" style={{ backgroundColor: "#EDFAF3", border: "1px solid #A7DFC0" }}>
+            <span className="font-black text-sm" style={{ color: "#1A9E3F" }}>SmA+</span>
+            <span className="font-black text-sm" style={{ color: "#111827" }}>998 000 FCFA</span>
+          </div>
+          <Btn href="/boutique?categorie=irrigation">Commander</Btn>
+        </motion.div>
+
+      </div>
+    </section>
+  );
+}
+
 /* ── PAGE ─────────────────────────────────────────────── */
 export default function HomePage() {
   return (
@@ -984,10 +1109,8 @@ export default function HomePage() {
       <HeroText />
       <SolutionsGrid />
       <DesignedForYou />
-      <FullWidthImage />
+      <PompeMobileSection />
       <MobileHero />
-      <SmartValvesSection />
-      <SurveillanceSection />
       <ShowcaseCarousel />
       <FaqSection />
       <WhatsAppFab />

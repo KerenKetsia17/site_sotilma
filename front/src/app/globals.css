@@ -91,6 +91,7 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   background: var(--c-surface);
+  color-scheme: light;
 }
 
 body {
