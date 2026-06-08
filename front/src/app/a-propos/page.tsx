@@ -24,11 +24,11 @@ const partners = [
 
 /* Réalisations — images de terrain */
 const realisations: { src: string | null; alt: string; label: string; className?: string }[] = [
-  { 
-    src: "/r1.png", 
-    alt: "Installation technique", 
+  {
+    src: "/r1.png",
+    alt: "Installation technique",
     label: "Installation technique",
-    className: "col-span-2 md:col-span-1 row-span-2 md:row-span-2" 
+    className: "col-span-2 md:col-span-1 row-span-2 md:row-span-2"
   },
   {
     src: "/realisation-2.jpg",
@@ -36,11 +36,11 @@ const realisations: { src: string | null; alt: string; label: string; className?
     label: "Projet d'irrigation",
     className: "col-span-1 md:col-span-1 row-span-1 md:row-span-1"
   },
-  { 
-    src: "/PHOTO-2025-01-30-16-11-59 (1).jpg", 
-    alt: "Irrigation en action", 
+  {
+    src: "/PHOTO-2025-01-30-16-11-59 (1).jpg",
+    alt: "Irrigation en action",
     label: "Irrigation en action",
-    className: "col-span-1 md:col-span-1 row-span-1 md:row-span-1" 
+    className: "col-span-1 md:col-span-1 row-span-1 md:row-span-1"
   },
   {
     src: "/equipe-terrain.jpg",
