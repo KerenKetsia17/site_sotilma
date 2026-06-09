@@ -29,7 +29,7 @@ const products: Product[] = [
   { id: "vanne-simple",                 name: "Vanne motorisée standard",             description: "Simple voie, solaire, pilotage 4G.",                  price: 180000,  image: "https://static.wixstatic.com/media/75ad33_82b826c91cd44c88954123ab55cbc531~mv2.jpg/v1/fill/w_446,h_544,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_82b826c91cd44c88954123ab55cbc531~mv2.jpg", category: "vanne" },
   { id: "vanne-industrielle-papillon",  name: "Vanne industrielle papillon électrique", description: "Applications intensives. Anti-corrosion.",           price: 527000,  image: "https://static.wixstatic.com/media/75ad33_8d18ecdc976649c2af880eb99f21fa96~mv2.png/v1/fill/w_748,h_792,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_8d18ecdc976649c2af880eb99f21fa96~mv2.png", category: "vanne" },
   { id: "pack-pro",                     name: "Kit Pack Pro",                         description: "Pack complet caméra + vanne tout-en-un.",             price: 1408000, image: "https://static.wixstatic.com/media/75ad33_e7457a5da71342e382e3536852a93c3d~mv2.jpeg/v1/fill/w_748,h_512,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_e7457a5da71342e382e3536852a93c3d~mv2.jpeg", category: "pack" },
-  { id: "Sotilma Mobile",                     name: "Sotilma Mobile",                         description: "Pack complet caméra + vanne tout-en-un.",             price: 1408000, image: "https://static.wixstatic.com/media/75ad33_e7457a5da71342e382e3536852a93c3d~mv2.jpeg/v1/fill/w_748,h_512,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_e7457a5da71342e382e3536852a93c3d~mv2.jpeg", category: "pack" },
+  { id: "sotilma-mobile-sm01",          name: "Sotilma Mobile SM-01 Simple",          description: "Pompe de surface solaire mobile. Puissance 1890W, débit 45 m³/h.", price: 975000, image: "https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png", category: "pack" },
 ];
 
 const productDetails: Record<string, { longDesc: string; features: string[]; featureItems?: { title: string; desc: string }[] }> = {
@@ -39,20 +39,20 @@ const productDetails: Record<string, { longDesc: string; features: string[]; fea
   "camera-agricole-4g":          { longDesc: "Caméra de surveillance agricole alimentée par énergie solaire avec connexion 4G. Vision nocturne HD, détection de mouvement, alertes en temps réel et stockage cloud. Résistante aux intempéries (IP66).", features: ["Vision HD 24/7", "100% solaire", "Alertes instantanées", "Stockage cloud", "Surveillance 24h/24", "Vision nocturne infrarouge", "Détection de mouvement", "Étanche IP66"] },
   "camera-agricole-v1":          { longDesc: "Caméra de surveillance agricole alimentée par énergie solaire avec connexion 4G. Vision nocturne HD, détection de mouvement, alertes en temps réel et stockage cloud. Résistante aux intempéries (IP66).", features: ["Vision HD 24/7", "100% solaire", "Alertes instantanées", "Stockage cloud", "Surveillance 24h/24", "Vision nocturne infrarouge", "Détection de mouvement", "Étanche IP66"] },
   "camera-agricole-v2":          { longDesc: "La Caméra Agricole Sotilma V2 offre une surveillance AI en continu, jour et nuit, avec double objectif et vision 360° auto-tracking. Alimentée par panneau solaire 6W + batterie intégrée, elle fonctionne en totale autonomie. Qualité 2K avec vision nocturne couleur (5 LEDs) et résistance IP66.", features: [], featureItems: [
-    { title: "Surveillance AI en continu",          desc: "Enregistre jour & nuit automatiquement, même sans mouvement." },
-    { title: "Vision 360° auto-tracking",           desc: "Rotation 355°/90°, suit les intrus sans angle mort." },
-    { title: "Double objectif",                     desc: "Large angle + zoom pour couvrir champs + zones sensibles." },
-    { title: "Capteur PIR haute précision",         desc: "Détection humaine jusqu'à 27 m : alertes ultra-rapides." },
-    { title: "Énergie solaire 6W + batterie intégrée", desc: "2h de soleil/jour = autonomie annuelle. Installation sans câbles." },
-    { title: "Qualité 2K + nuit en couleur (5 LEDs)", desc: "Images nettes des personnes, même dans le noir total." },
-    { title: "Matériel robuste",                    desc: "4G + Bluetooth, micro & haut-parleur (interphone), IP66 anti-pluie/poussière." },
-  ]},
+      { title: "Surveillance AI en continu",          desc: "Enregistre jour & nuit automatiquement, même sans mouvement." },
+      { title: "Vision 360° auto-tracking",           desc: "Rotation 355°/90°, suit les intrus sans angle mort." },
+      { title: "Double objectif",                     desc: "Large angle + zoom pour couvrir champs + zones sensibles." },
+      { title: "Capteur PIR haute précision",         desc: "Détection humaine jusqu'à 27 m : alertes ultra-rapides." },
+      { title: "Énergie solaire 6W + batterie intégrée", desc: "2h de soleil/jour = autonomie annuelle. Installation sans câbles." },
+      { title: "Qualité 2K + nuit en couleur (5 LEDs)", desc: "Images nettes des personnes, même dans le noir total." },
+      { title: "Matériel robuste",                    desc: "4G + Bluetooth, micro & haut-parleur (interphone), IP66 anti-pluie/poussière." },
+    ]},
   "arroseur-auto-4g":            { longDesc: "L'arroseur automatique 4G combine goutte-à-goutte et aspersion dans un seul appareil pilotable à distance. Programmable depuis votre smartphone, il optimise la consommation d'eau.", features: ["Goutte-à-goutte", "Aspersion intégrée", "Pilotable à distance", "Carte SIM 4G", "Programmable via appli", "Alimentation solaire", "Économie d'eau", "Installation facile", "Garantie 6 mois"] },
   "sotilma-st02t":               { longDesc: "Le Sotilma ST-02T gère simultanément deux parcelles distinctes. Son système de distribution optimisée garantit une répartition précise de l'eau, avec pilotage complet via 4G.", features: ["Gestion double parcelle", "Distribution optimisée", "Pilotage 4G", "Alimentation solaire", "Installation facile", "Programmable via appli", "Anti-corrosion", "Robuste tout-terrain", "Garantie 6 mois"] },
   "vanne-simple":                { longDesc: "La vanne motorisée standard est la solution idéale pour automatiser votre irrigation. Alimentée par énergie solaire et pilotable via 4G.", features: ["Simple voie", "Alimentation solaire", "Pilotage 4G", "Installation facile", "Étanchéité IP68", "Anti-corrosion", "Faible consommation", "Compatible tout réseau", "Garantie 6 mois"] },
   "vanne-industrielle-papillon": { longDesc: "La vanne industrielle papillon électrique est conçue pour les applications intensives. Sa conception anti-corrosion et sa motorisation électrique en font la solution parfaite pour les grandes exploitations.", features: ["Usage intensif", "Anti-corrosion", "Motorisation électrique", "Pilotage à distance", "Grande durabilité", "Étanchéité IP68", "Pression jusqu'à 10 bar", "Matière fonte / acier", "Garantie 12 mois"] },
   "pack-pro":                    { longDesc: "Le Kit Pack Pro regroupe tout ce dont vous avez besoin pour surveiller et irriguer votre exploitation. Caméra 4G et vanne automatique, le tout alimenté à 100% solaire.", features: ["Caméra 4G incluse", "Vanne automatique", "Pilotage complet", "100% solaire", "Installation clé en main", "Surveillance 24/7", "Économie d'eau", "Application mobile incluse", "Garantie 6 mois"] },
-  "Sotilma Mobile":                    { longDesc: "Le Kit Pack Pro regroupe tout ce dont vous avez besoin pour surveiller et irriguer votre exploitation. Caméra 4G et vanne automatique, le tout alimenté à 100% solaire.", features: ["Caméra 4G incluse", "Vanne automatique", "Pilotage complet", "100% solaire", "Installation clé en main", "Surveillance 24/7", "Économie d'eau", "Application mobile incluse", "Garantie 6 mois"] },
+  "sotilma-mobile-sm01":         { longDesc: "Le Sotilma Mobile SM-01 Simple est une pompe de surface solaire mobile haute performance. Puissance 1890W, débit 45 m³/h, hybride AC/DC. Suffisant pour irriguer 1 à 2 hectares.", features: ["Pompe solaire 1890W", "Débit 45 m³/h", "Hybride AC/DC", "Chariot mobile roulant", "Kit panneaux solaires 1800W", "Câblage complet", "Système monitoring", "Tuyauterie incluse", "Made in Sénégal"] },
 };
 
 function getIcon(feature: string) {
@@ -106,10 +106,10 @@ export default function ProductPage() {
 
   if (!product) {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center gap-4">
-        <p className="text-lg font-semibold" style={{ color: DARK }}>Produit introuvable</p>
-        <Link href="/boutique" className="text-sm underline" style={{ color: BLUE }}>← Retour à la boutique</Link>
-      </main>
+        <main className="min-h-screen flex flex-col items-center justify-center gap-4">
+          <p className="text-lg font-semibold" style={{ color: DARK }}>Produit introuvable</p>
+          <Link href="/boutique" className="text-sm underline" style={{ color: BLUE }}>← Retour à la boutique</Link>
+        </main>
     );
   }
 
@@ -120,149 +120,151 @@ export default function ProductPage() {
   }
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: "#F0F4F8" }}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-16 py-12">
+      <main className="min-h-screen" style={{ backgroundColor: "#F0F4F8" }}>
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-16 py-12">
 
-        {/* Retour */}
-        <button onClick={() => router.back()}
-          className="flex items-center gap-2 text-sm font-medium mb-8 transition-opacity hover:opacity-60"
-          style={{ color: TEXT_M }}>
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          Retour à la boutique
-        </button>
+          {/* Retour */}
+          <button onClick={() => router.back()}
+                  className="flex items-center gap-2 text-sm font-medium mb-8 transition-opacity hover:opacity-60"
+                  style={{ color: TEXT_M }}>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Retour à la boutique
+          </button>
 
-        {/* Layout 2 colonnes */}
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Layout 2 colonnes */}
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
 
-          {/* Image / carrousel */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}
-            className="rounded-2xl flex flex-col items-center justify-center p-10 gap-4"
-            style={{ backgroundColor: "#E8EFF6", minHeight: 380 }}>
-            <div className="relative w-full" style={{ aspectRatio: "1/1", maxWidth: 320 }}>
-              <Image src={images[imgIdx]} alt={product.name} fill className="object-contain" sizes="380px" priority />
-            </div>
-            {images.length > 1 && (
-              <div className="flex gap-3">
-                {images.map((src, i) => (
-                  <button key={i} onClick={() => setImgIdx(i)}
-                    className="relative rounded-xl overflow-hidden transition-all duration-200"
-                    style={{
-                      width: 56, height: 56,
-                      border: i === imgIdx ? `2px solid ${BLUE}` : "2px solid transparent",
-                      backgroundColor: "#fff",
-                    }}>
-                    <Image src={src} alt={`Vue ${i + 1}`} fill className="object-contain p-1" sizes="60px" />
-                  </button>
-                ))}
+            {/* Image / carrousel */}
+            <motion.div
+                initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}
+                className="rounded-2xl flex flex-col items-center justify-center p-10 gap-4"
+                style={{ backgroundColor: "#E8EFF6", minHeight: 380 }}>
+              <div className="relative w-full" style={{ aspectRatio: "1/1", maxWidth: 320 }}>
+                <Image src={images[imgIdx]} alt={product.name} fill className="object-contain" sizes="380px" priority />
               </div>
-            )}
-          </motion.div>
+              {images.length > 1 && (
+                  <div className="flex gap-3">
+                    {images.map((src, i) => (
+                        <button key={i} onClick={() => setImgIdx(i)}
+                                className="relative rounded-xl overflow-hidden transition-all duration-200"
+                                style={{
+                                  width: 56, height: 56,
+                                  border: i === imgIdx ? `2px solid ${BLUE}` : "2px solid transparent",
+                                  backgroundColor: "#fff",
+                                }}>
+                          <Image src={src} alt={`Vue ${i + 1}`} fill className="object-contain p-1" sizes="60px" />
+                        </button>
+                    ))}
+                  </div>
+              )}
+            </motion.div>
 
-          {/* Infos */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex flex-col">
+            {/* Infos */}
+            <motion.div
+                initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
+                className="flex flex-col">
 
-            {/* Marque */}
-            <p className="font-semibold tracking-[0.22em] uppercase mb-1.5" style={{ fontSize: "0.68rem", color: BLUE }}>
-              Sotilma
-            </p>
-
-            {/* Nom */}
-            <h1 className="font-bold leading-snug mb-2" style={{ fontSize: "clamp(1rem, 2vw, 1.3rem)", color: DARK }}>
-              {product.name}
-            </h1>
-
-            {/* Prix */}
-            <div className="flex items-center gap-3 mb-3 flex-wrap">
-              <p className="font-black" style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.4rem)", color: RED }}>
-                {fmt(product.price)} <span style={{ fontSize: "0.7em", fontWeight: 600 }}>FCFA</span>
+              {/* Marque */}
+              <p className="font-semibold tracking-[0.22em] uppercase mb-1.5" style={{ fontSize: "0.68rem", color: BLUE }}>
+                Sotilma
               </p>
-              {product.oldPrice && (
-                <>
-                  <p className="font-medium line-through" style={{ fontSize: "0.85rem", color: TEXT_M }}>
-                    {fmt(product.oldPrice)} FCFA
-                  </p>
-                  <span className="px-2 py-0.5 rounded-full text-white font-bold text-xs"
-                    style={{ backgroundColor: "#C0392B" }}>
+
+              {/* Nom */}
+              <h1 className="font-medium leading-snug mb-2" style={{ fontSize: "clamp(1rem, 2vw, 1.3rem)", color: DARK }}>
+                {product.name}
+              </h1>
+
+              {/* Prix */}
+              <div className="flex items-center gap-3 mb-3 flex-wrap">
+                <p className="font-semibold" style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.4rem)", color: RED }}>
+                  {fmt(product.price)} <span style={{ fontSize: "0.7em", fontWeight: 600 }}>FCFA</span>
+                </p>
+                {product.oldPrice && (
+                    <>
+                      <p className="font-medium line-through" style={{ fontSize: "0.85rem", color: TEXT_M }}>
+                        {fmt(product.oldPrice)} FCFA
+                      </p>
+                      <span className="px-2 py-0.5 rounded-full text-white font-bold text-xs"
+                            style={{ backgroundColor: "#C0392B" }}>
                     -{Math.round((1 - product.price / product.oldPrice) * 100)}%
                   </span>
-                </>
+                    </>
+                )}
+              </div>
+
+              {/* Séparateur */}
+              <div style={{ height: 1, backgroundColor: "#DDE6F0", marginBottom: 14 }} />
+
+              {/* Description */}
+              {detail && (
+                  <p className="leading-relaxed mb-5" style={{ fontSize: "0.82rem", color: TEXT_M }}>
+                    {detail.longDesc}
+                  </p>
               )}
-            </div>
 
-            {/* Séparateur */}
-            <div style={{ height: 1, backgroundColor: "#DDE6F0", marginBottom: 14 }} />
-
-            {/* Description */}
-            {detail && (
-              <p className="leading-relaxed mb-5" style={{ fontSize: "0.82rem", color: TEXT_M }}>
-                {detail.longDesc}
-              </p>
-            )}
-
-            {/* Caractéristiques avec sous-texte (featureItems) */}
-            {detail?.featureItems && detail.featureItems.length > 0 && (
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                {detail.featureItems.map((f) => (
-                  <div key={f.title}
-                    className="flex items-start gap-2.5 px-3 py-3 rounded-xl"
-                    style={{ backgroundColor: "#EDF4FB", border: "1px solid #D0E4F5" }}>
-                    <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
-                      style={{ backgroundColor: BLUE }}>
-                      {getIcon(f.title)}
-                    </div>
-                    <div>
-                      <p className="font-semibold leading-tight mb-0.5" style={{ fontSize: "0.72rem", color: DARK }}>{f.title}</p>
-                      <p className="leading-snug" style={{ fontSize: "0.65rem", color: TEXT_M }}>{f.desc}</p>
-                    </div>
+              {/* Caractéristiques avec sous-texte (featureItems) */}
+              {detail?.featureItems && detail.featureItems.length > 0 && (
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    {detail.featureItems.map((f) => (
+                        <div key={f.title}
+                             className="flex items-start gap-2.5 px-3 py-3 rounded-xl"
+                             style={{ backgroundColor: "#EDF4FB", border: "1px solid #D0E4F5" }}>
+                          <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                               style={{ backgroundColor: BLUE }}>
+                            {getIcon(f.title)}
+                          </div>
+                          <div>
+                            <p className="font-semibold leading-tight mb-0.5" style={{ fontSize: "0.72rem", color: DARK }}>{f.title}</p>
+                            <p className="leading-snug" style={{ fontSize: "0.65rem", color: TEXT_M }}>{f.desc}</p>
+                          </div>
+                        </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            )}
+              )}
 
-            {/* Grille caractéristiques simples avec icônes */}
-            {detail && detail.features.length > 0 && (
-              <div className="grid grid-cols-3 gap-2 mb-6">
-                {detail.features.map((f) => (
-                  <div key={f}
-                    className="flex items-center gap-2 px-2.5 py-2.5 rounded-xl"
-                    style={{ backgroundColor: "#EDF4FB", border: "1px solid #D0E4F5" }}>
-                    <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: BLUE }}>
-                      {getIcon(f)}
-                    </div>
-                    <span className="leading-tight" style={{ fontSize: "0.68rem", fontWeight: 500, color: DARK }}>{f}</span>
+              {/* Grille caractéristiques simples avec icônes */}
+              {detail && detail.features.length > 0 && (
+                  <div className="grid grid-cols-3 gap-2 mb-6">
+                    {detail.features.map((f) => (
+                        <div key={f}
+                             className="flex items-center gap-2 px-2.5 py-2.5 rounded-xl"
+                             style={{ backgroundColor: "#EDF4FB", border: "1px solid #D0E4F5" }}>
+                          <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                               style={{ backgroundColor: BLUE }}>
+                            {getIcon(f)}
+                          </div>
+                          <span className="leading-tight" style={{ fontSize: "0.68rem", fontWeight: 500, color: DARK }}>{f}</span>
+                        </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            )}
+              )}
 
-            {/* Boutons */}
-            <div className="flex flex-row gap-3 mb-6">
-              <motion.button
-                onClick={handleAddToCart}
-                className="flex-1 py-2 px-4 rounded-full font-semibold text-xs border-2"
-                animate={{ borderColor: added ? "#22c55e" : BLUE, color: added ? "#22c55e" : BLUE }}
-                whileTap={{ scale: 0.97 }}
-                style={{ backgroundColor: "#FFF" }}
-                transition={{ duration: 0.15 }}
-              >
-                {added ? "Ajouté ✓" : "Ajouter au panier"}
-              </motion.button>
-              <Link href="/panier"
-                className="flex-1 py-2 px-4 rounded-full font-semibold text-xs text-center transition-all hover:opacity-90 border-2"
-                style={{ backgroundColor: "#FFF", color: BLUE, borderColor: BLUE }}
-                onClick={handleAddToCart}>
-                Commander →
-              </Link>
-            </div>
-          </motion.div>
+              {/* Boutons */}
+              <div className="flex flex-row gap-3 mb-6">
+                <motion.button
+                    onClick={handleAddToCart}
+                    className="flex-1 py-2 px-4 rounded-full font-semibold text-xs border-2"
+                    animate={{ borderColor: added ? "#22c55e" : BLUE, color: added ? "#22c55e" : BLUE }}
+                    whileTap={{ scale: 0.97 }}
+                    style={{ backgroundColor: "#FFF" }}
+                    transition={{ duration: 0.15 }}
+                >
+                  {added ? "Ajouté ✓" : "Ajouter au panier"}
+                </motion.button>
+                <Link href="/panier"
+                      className="flex-1 py-2 px-4 rounded-full font-semibold text-xs text-center transition-all hover:opacity-90 border-2"
+                      style={{ backgroundColor: "#FFF", color: BLUE, borderColor: BLUE }}
+                      onClick={handleAddToCart}>
+                  Commander →
+                </Link>
+              </div>
+
+
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
   );
 }
