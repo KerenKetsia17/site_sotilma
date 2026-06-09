@@ -19,9 +19,8 @@ const shopLinks = [
 
 const companyLinks = [
   { label: "À propos",         href: "/a-propos" },
-  { label: "Notre expertise",  href: "/expertise" },
   { label: "Contact",          href: "/contact" },
-  { label: "Mentions légales", href: "/termes-et-conditions" },
+  { label: "Mentions légales", href: "#" },
 ];
 
 const fadeUp: Variants = {
