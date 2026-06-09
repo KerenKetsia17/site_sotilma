@@ -969,7 +969,7 @@ function FaqSection() {
   );
 }
 
-/* ── CTA FINAL ───────────────────────────────────────── */
+// CTA FINAL
 function CtaFinal() {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -1007,7 +1007,7 @@ function CtaFinal() {
   );
 }
 
-/* ── WhatsApp FAB ─────────────────────────────────────── */
+// WhatsApp FAB
 function WhatsAppFab() {
   return (
     <a href="https://web.whatsapp.com/send?phone=221770982290&text=Bonjour%20Sotilma%2C%20je%20souhaite%20avoir%20des%20informations"
@@ -1022,143 +1022,143 @@ function WhatsAppFab() {
   );
 }
 
-/* ══════════════════════════════════════════════════════
-   POMPE MOBILE — section accueil
-══════════════════════════════════════════════════════ */
+// CAMERA SOTILMA — section accueil
 function CameraAgricoleSection() {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   const specs = [
-    { icon: "☀️", label: "Puissance Solaire", value: "2000 - 4000W" },
-    { icon: "💧", label: "Débit Pompage",      value: "45 – 90 m³/h" },
-    { icon: "🌿", label: "Jusqu'à",            value: "10 ha" },
+    { icon: "☀️", label: "Alimentation",  value: "100% solaire" },
+    { icon: "🤖", label: "Sécurité",      value: "Surveillance IA en continu" },
+    { icon: "📐", label: "Couverture",    value: "Jusqu'à 1 ha" },
   ];
 
   return (
       <section ref={ref} style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-12">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
 
-          {/* Image */}
-          <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex justify-center items-center"
-          >
-            <div
-                className="relative"
-                style={{
-                  width: "70%",
-                  maxWidth: 380,
-                  aspectRatio: "4/3",
-                }}
-            >
-              <Image
-                  src="https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png"
-                  alt="Sotilma Mobile — Pompe solaire"
-                  fill
-                  className="object-contain"
-                  sizes="500px"
-                  priority
-              />
+            {/* Bloc Texte */}
+            <div className="flex flex-col items-center text-center">
+
+              {/* Header */}
+              <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6 }}
+                  className="mb-8"
+              >
+                <h2
+                    className="font-black uppercase leading-none"
+                    style={{
+                      fontSize: "clamp(1.4rem, 3vw, 2.2rem)",
+                      color: "#1E72B8",
+                      letterSpacing: "0.02em",
+                    }}
+                >
+                  Caméra Sotilma
+                </h2>
+
+                <p
+                    className="font-semibold tracking-[0.18em] uppercase text-xs mt-2"
+                    style={{ color: "#5A6B7A" }}
+                >
+                  Caméra agro-industrielle
+                </p>
+              </motion.div>
+
+              {/* Specs */}
+              <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="flex items-center justify-center whitespace-nowrap mb-8"
+              >
+                {specs.map((s, i) => (
+                    <div
+                        key={s.label}
+                        className="flex items-center gap-3 px-4 sm:px-6 py-3"
+                        style={{
+                          borderRight:
+                              i < specs.length - 1
+                                  ? "1px solid #DDE6F0"
+                                  : "none",
+                        }}
+                    >
+                      <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
+
+                      <div className="text-left">
+                        <p
+                            className="font-semibold uppercase"
+                            style={{
+                              fontSize: "0.65rem",
+                              color: "#5A6B7A",
+                              letterSpacing: "0.1em",
+                            }}
+                        >
+                          {s.label}
+                        </p>
+
+                        <p
+                            className="font-black"
+                            style={{
+                              fontSize: "0.95rem",
+                              color: "#111827",
+                            }}
+                        >
+                          {s.value}
+                        </p>
+                      </div>
+                    </div>
+                ))}
+              </motion.div>
+
+              {/* CTA */}
+              <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Btn href="/boutique?categorie=camera">
+                  VOIR PLUS
+                </Btn>
+              </motion.div>
+
             </div>
-          </motion.div>
 
-          {/* Texte */}
-          <div>
-
-            {/* Header */}
+            {/* Bloc Image */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6 }}
-                className="mb-8"
+                initial={{ opacity: 0, x: 30 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex justify-center items-center lg:order-last order-first"
             >
-              <h2
-                  className="font-black uppercase leading-none"
+              <div
+                  className="relative"
                   style={{
-                    fontSize: "clamp(1.4rem, 3vw, 2.2rem)",
-                    color: "#1E72B8",
-                    letterSpacing: "0.02em",
+                    width: "70%",
+                    maxWidth: 380,
+                    aspectRatio: "4/3",
                   }}
               >
-                Camera Agricole
-              </h2>
-
-              <p
-                  className="font-semibold tracking-[0.18em] uppercase text-xs"
-                  style={{ color: "#5A6B7A" }}
-              >
-                Pompe solaire mobile
-              </p>
-            </motion.div>
-
-            {/* Specs */}
-            <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex gap-0 mb-8 flex-wrap"
-            >
-              {specs.map((s, i) => (
-                  <div
-                      key={s.label}
-                      className="flex items-center gap-3 px-6 py-3"
-                      style={{
-                        borderRight:
-                            i < specs.length - 1
-                                ? "1px solid #DDE6F0"
-                                : "none",
-                      }}
-                  >
-                    <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
-                    <div>
-                      <p
-                          className="font-semibold uppercase"
-                          style={{
-                            fontSize: "0.65rem",
-                            color: "#5A6B7A",
-                            letterSpacing: "0.1em",
-                          }}
-                      >
-                        {s.label}
-                      </p>
-                      <p
-                          className="font-black"
-                          style={{
-                            fontSize: "0.95rem",
-                            color: "#111827",
-                          }}
-                      >
-                        {s.value}
-                      </p>
-                    </div>
-                  </div>
-              ))}
-            </motion.div>
-
-            {/* CTA */}
-            <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <Btn href="/boutique?categorie=irrigation">
-                Commander
-              </Btn>
+                <Image
+                    src="/v2.jpeg"
+                    alt="Sotilma Caméra — Caméra agro-industrielle"
+                    fill
+                    className="object-contain"
+                    sizes="500px"
+                    priority
+                />
+              </div>
             </motion.div>
 
           </div>
-
         </div>
       </section>
   );
 }
 
-/* ══════════════════════════════════════════════════════
-   POMPE MOBILE — section accueil
-══════════════════════════════════════════════════════ */
+// POMPE MOBILE — section accueil
 function PompeMobileSection() {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -1166,262 +1166,287 @@ function PompeMobileSection() {
   const specs = [
     { icon: "☀️", label: "Puissance Solaire", value: "2000 - 4000W" },
     { icon: "💧", label: "Débit Pompage",      value: "45 – 90 m³/h" },
-    { icon: "🌿", label: "Jusqu'à",            value: "10 ha" },
+    { icon: "🌿", label: "Surface maximum",    value: "10 ha" },
   ];
 
-  // const offers = [
-  //   { name: "SmA", tag: "SIMPLE",                         price: "958 000", color: "#1E72B8" },
-  //   { name: "SmA+", tag: "AVEC CAMÉRA ET COMMANDE",       price: "998 000", color: "#1A9E3F" },
-  // ];
-
   return (
-    <section ref={ref} style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
-      <div className="grid lg:grid-cols-2 gap-10 items-center">
+      <section ref={ref} style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-12">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
 
-        {/* Image */}
-        <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex justify-center items-center"
-        >
-          <div
-              className="relative"
-              style={{
-                width: "70%",
-                maxWidth: 380,
-                aspectRatio: "4/3",
-              }}
-          >
-            <Image
-                src="https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png"
-                alt="Sotilma Mobile — Pompe solaire"
-                fill
-                className="object-contain"
-                sizes="500px"
-                priority
-            />
-          </div>
-        </motion.div>
-
-        {/* Texte */}
-        <div>
-
-          {/* Header */}
-          <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="mb-8"
-          >
-            <h2
-                className="font-black uppercase leading-none"
-                style={{
-                  fontSize: "clamp(1.4rem, 3vw, 2.2rem)",
-                  color: "#1E72B8",
-                  letterSpacing: "0.02em",
-                }}
+            {/* Image */}
+            <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex justify-center items-center"
             >
-              Sotilma Mobile
-            </h2>
+              <div
+                  className="relative"
+                  style={{
+                    width: "70%",
+                    maxWidth: 380,
+                    aspectRatio: "4/3",
+                  }}
+              >
+                <Image
+                    src="https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png"
+                    alt="Sotilma Mobile — Pompe solaire"
+                    fill
+                    className="object-contain"
+                    sizes="500px"
+                    priority
+                />
+              </div>
+            </motion.div>
 
-            <p
-                className="font-semibold tracking-[0.18em] uppercase text-xs"
-                style={{ color: "#5A6B7A" }}
-            >
-              Pompe solaire mobile
-            </p>
-          </motion.div>
+            {/* Bloc Texte — MODIFIÉ : Ajout des classes de centrage pour aligner le bouton */}
+            <div className="flex flex-col items-center text-center">
 
-          {/* Specs */}
-          <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex gap-0 mb-8 flex-wrap"
-          >
-            {specs.map((s, i) => (
-                <div
-                    key={s.label}
-                    className="flex items-center gap-3 px-6 py-3"
+              {/* Header */}
+              <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6 }}
+                  className="mb-8"
+              >
+                <h2
+                    className="font-black uppercase leading-none"
                     style={{
-                      borderRight:
-                          i < specs.length - 1
-                              ? "1px solid #DDE6F0"
-                              : "none",
+                      fontSize: "clamp(1.4rem, 3vw, 2.2rem)",
+                      color: "#1E72B8",
+                      letterSpacing: "0.02em",
                     }}
                 >
-                  <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
-                  <div>
-                    <p
-                        className="font-semibold uppercase"
+                  Sotilma Mobile
+                </h2>
+
+                <p
+                    className="font-semibold tracking-[0.18em] uppercase text-xs mt-2"
+                    style={{ color: "#5A6B7A" }}
+                >
+                  Pompe solaire mobile
+                </p>
+              </motion.div>
+
+              {/* Specs — MODIFIÉ : Ajout du même style bloqué sur une seule ligne */}
+              <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="flex items-center justify-center whitespace-nowrap mb-8"
+              >
+                {specs.map((s, i) => (
+                    <div
+                        key={s.label}
+                        className="flex items-center gap-3 px-4 sm:px-6 py-3"
                         style={{
-                          fontSize: "0.65rem",
-                          color: "#5A6B7A",
-                          letterSpacing: "0.1em",
+                          borderRight:
+                              i < specs.length - 1
+                                  ? "1px solid #DDE6F0"
+                                  : "none",
                         }}
                     >
-                      {s.label}
-                    </p>
-                    <p
-                        className="font-black"
-                        style={{
-                          fontSize: "0.95rem",
-                          color: "#111827",
-                        }}
-                    >
-                      {s.value}
-                    </p>
-                  </div>
-                </div>
-            ))}
-          </motion.div>
+                      <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
+                      <div className="text-left">
+                        <p
+                            className="font-semibold uppercase"
+                            style={{
+                              fontSize: "0.65rem",
+                              color: "#5A6B7A",
+                              letterSpacing: "0.1em",
+                            }}
+                        >
+                          {s.label}
+                        </p>
+                        <p
+                            className="font-black"
+                            style={{
+                              fontSize: "0.95rem",
+                              color: "#111827",
+                            }}
+                        >
+                          {s.value}
+                        </p>
+                      </div>
+                    </div>
+                ))}
+              </motion.div>
 
-          {/* CTA */}
-          <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Btn href="/boutique?categorie=irrigation">
-              Commander
-            </Btn>
-          </motion.div>
+              {/* CTA — AJOUTÉ : Bloc bouton identique et centré */}
+              <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Btn href="/boutique?categorie=pompage">
+                  VOIR PLUS
+                </Btn>
+              </motion.div>
 
+            </div>
+
+          </div>
         </div>
-
-      </div>
-    </section>
+      </section>
   );
 }
 
-/* ══════════════════════════════════════════════════════
-   VANNE CONNECTEE — section accueil
-══════════════════════════════════════════════════════ */
+// VANNE CONNECTEE — section accueil
 function VanneConnecterSection() {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   const specs = [
-    { icon: "☀️", label: "Puissance Solaire", value: "2000 - 4000W" },
-    { icon: "💧", label: "Débit Pompage",      value: "45 – 90 m³/h" },
-    { icon: "🌿", label: "Jusqu'à",            value: "10 ha" },
+    { icon: "☀️", label: "Alimentation",      value: "100% solaire" },
+    { icon: "💧", label: "Contrôle Débit",    value: "Pilotable avec le telephone" },
+    { icon: "🌿", label: "Surface irriguée",  value: "4 ha" },
   ];
 
   return (
       <section ref={ref} style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          {/* Texte */}
-          <div>
+        {/* MODIFIÉ : Ajout du même conteneur global que la Caméra */}
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-12">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
 
-            {/* Header */}
+            {/* Texte */}
+            <div className="flex flex-col items-center text-center">
+
+              {/* Header */}
+              <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6 }}
+                  className="mb-8"
+              >
+                <h2
+                    className="font-black uppercase leading-none"
+                    style={{
+                      fontSize: "clamp(1.4rem, 3vw, 2.2rem)",
+                      color: "#1E72B8",
+                      letterSpacing: "0.02em",
+                    }}
+                >
+                  Vanne Sotilma
+                </h2>
+
+                {/* MODIFIÉ : Ajout du mt-2 identique à la caméra */}
+                <p
+                    className="font-semibold tracking-[0.18em] uppercase text-xs mt-2"
+                    style={{ color: "#5A6B7A" }}
+                >
+                  Vanne connectée 4G
+                </p>
+              </motion.div>
+
+              {/* Specs */}
+              <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="flex items-center justify-center whitespace-nowrap mb-8"
+              >
+                {specs.map((s, i) => (
+                    <div
+                        key={s.label}
+                        className="flex items-center gap-3 px-4 sm:px-6 py-3"
+                        style={{
+                          borderRight:
+                              i < specs.length - 1
+                                  ? "1px solid #DDE6F0"
+                                  : "none",
+                        }}
+                    >
+                      <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
+
+                      <div className="text-left">
+                        <p
+                            className="font-semibold uppercase"
+                            style={{
+                              fontSize: "0.65rem",
+                              color: "#5A6B7A",
+                              letterSpacing: "0.1em",
+                            }}
+                        >
+                          {s.label}
+                        </p>
+
+                        <p
+                            className="font-black"
+                            style={{
+                              fontSize: "0.95rem",
+                              color: "#111827",
+                            }}
+                        >
+                          {s.value}
+                        </p>
+                      </div>
+                    </div>
+                ))}
+              </motion.div>
+
+              {/* CTA */}
+              <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Btn href="/boutique?categorie=irrigation">
+                  VOIR PLUS
+                </Btn>
+              </motion.div>
+
+            </div>
+
+            {/* Image */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6 }}
-                className="mb-8"
-            >
-              <h2
-                  className="font-black uppercase leading-none"
+                initial={{ opacity: 0, x: -30 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex justify-center items-center">
+              <div
+                  className="relative"
                   style={{
-                    fontSize: "clamp(1.4rem, 3vw, 2.2rem)",
-                    color: "#1E72B8",
-                    letterSpacing: "0.02em",
+                    width: "70%",
+                    maxWidth: 380,
+                    aspectRatio: "4/3",
                   }}
               >
-                Sotilma Mobile
-              </h2>
-
-              <p
-                  className="font-semibold tracking-[0.18em] uppercase text-xs"
-                  style={{ color: "#5A6B7A" }}
-              >
-                Pompe solaire mobile
-              </p>
+                <Image
+                    src="https://static.wixstatic.com/media/75ad33_0bfea267808b4dc0b1cb3a376674b5b3~mv2.png/v1/fill/w_748,h_780,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_0bfea267808b4dc0b1cb3a376674b5b3~mv2.png"
+                    alt="Sotilma Vanne — Vanne connectee"
+                    fill
+                    className="object-contain"
+                    sizes="500px"
+                    priority
+                />
+              </div>
             </motion.div>
-
-            {/* Specs */}
-            <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex gap-0 mb-8 flex-wrap"
-            >
-              {specs.map((s, i) => (
-                  <div
-                      key={s.label}
-                      className="flex items-center gap-3 px-6 py-3"
-                      style={{
-                        borderRight:
-                            i < specs.length - 1
-                                ? "1px solid #DDE6F0"
-                                : "none",
-                      }}
-                  >
-                    <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
-                    <div>
-                      <p
-                          className="font-semibold uppercase"
-                          style={{
-                            fontSize: "0.65rem",
-                            color: "#5A6B7A",
-                            letterSpacing: "0.1em",
-                          }}
-                      >
-                        {s.label}
-                      </p>
-                      <p
-                          className="font-black"
-                          style={{
-                            fontSize: "0.95rem",
-                            color: "#111827",
-                          }}
-                      >
-                        {s.value}
-                      </p>
-                    </div>
-                  </div>
-              ))}
-            </motion.div>
-
-            {/* CTA */}
-            <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <Btn href="/boutique?categorie=irrigation">
-                Commander
-              </Btn>
-            </motion.div>
-
           </div>
-          {/* Image */}
           <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex justify-center items-center"
+              className="flex justify-center items-center w-full h-full"
           >
             <div
-                className="relative"
+                className="relative w-full"
                 style={{
-                  width: "70%",
-                  maxWidth: 380,
-                  aspectRatio: "4/3",
+                  aspectRatio: "4/3", // Ajustez l'aspectRatio (ex: "1/1" ou "16/9") selon la forme réelle de votre flyer
                 }}
             >
               <Image
-                  src="https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png"
-                  alt="Sotilma Mobile — Pompe solaire"
+                  src="/flyer.jpeg"
+                  alt="Sotilma — Flyer commercial"
                   fill
-                  className="object-contain"
-                  sizes="500px"
+                  className="object-contain w-full h-full"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
               />
             </div>
           </motion.div>
         </div>
+
       </section>
   );
 }

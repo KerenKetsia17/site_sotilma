@@ -29,6 +29,7 @@ const products: Product[] = [
   { id: "vanne-simple",                 name: "Vanne motorisée standard",             description: "Simple voie, solaire, pilotage 4G.",                  price: 180000,  image: "https://static.wixstatic.com/media/75ad33_82b826c91cd44c88954123ab55cbc531~mv2.jpg/v1/fill/w_446,h_544,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_82b826c91cd44c88954123ab55cbc531~mv2.jpg", category: "vanne" },
   { id: "vanne-industrielle-papillon",  name: "Vanne industrielle papillon électrique", description: "Applications intensives. Anti-corrosion.",           price: 527000,  image: "https://static.wixstatic.com/media/75ad33_8d18ecdc976649c2af880eb99f21fa96~mv2.png/v1/fill/w_748,h_792,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_8d18ecdc976649c2af880eb99f21fa96~mv2.png", category: "vanne" },
   { id: "pack-pro",                     name: "Kit Pack Pro",                         description: "Pack complet caméra + vanne tout-en-un.",             price: 1408000, image: "https://static.wixstatic.com/media/75ad33_e7457a5da71342e382e3536852a93c3d~mv2.jpeg/v1/fill/w_748,h_512,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_e7457a5da71342e382e3536852a93c3d~mv2.jpeg", category: "pack" },
+  { id: "Sotilma Mobile",                     name: "Sotilma Mobile",                         description: "Pack complet caméra + vanne tout-en-un.",             price: 1408000, image: "https://static.wixstatic.com/media/75ad33_e7457a5da71342e382e3536852a93c3d~mv2.jpeg/v1/fill/w_748,h_512,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_e7457a5da71342e382e3536852a93c3d~mv2.jpeg", category: "pack" },
 ];
 
 const productDetails: Record<string, { longDesc: string; features: string[]; featureItems?: { title: string; desc: string }[] }> = {
@@ -51,6 +52,7 @@ const productDetails: Record<string, { longDesc: string; features: string[]; fea
   "vanne-simple":                { longDesc: "La vanne motorisée standard est la solution idéale pour automatiser votre irrigation. Alimentée par énergie solaire et pilotable via 4G.", features: ["Simple voie", "Alimentation solaire", "Pilotage 4G", "Installation facile", "Étanchéité IP68", "Anti-corrosion", "Faible consommation", "Compatible tout réseau", "Garantie 6 mois"] },
   "vanne-industrielle-papillon": { longDesc: "La vanne industrielle papillon électrique est conçue pour les applications intensives. Sa conception anti-corrosion et sa motorisation électrique en font la solution parfaite pour les grandes exploitations.", features: ["Usage intensif", "Anti-corrosion", "Motorisation électrique", "Pilotage à distance", "Grande durabilité", "Étanchéité IP68", "Pression jusqu'à 10 bar", "Matière fonte / acier", "Garantie 12 mois"] },
   "pack-pro":                    { longDesc: "Le Kit Pack Pro regroupe tout ce dont vous avez besoin pour surveiller et irriguer votre exploitation. Caméra 4G et vanne automatique, le tout alimenté à 100% solaire.", features: ["Caméra 4G incluse", "Vanne automatique", "Pilotage complet", "100% solaire", "Installation clé en main", "Surveillance 24/7", "Économie d'eau", "Application mobile incluse", "Garantie 6 mois"] },
+  "Sotilma Mobile":                    { longDesc: "Le Kit Pack Pro regroupe tout ce dont vous avez besoin pour surveiller et irriguer votre exploitation. Caméra 4G et vanne automatique, le tout alimenté à 100% solaire.", features: ["Caméra 4G incluse", "Vanne automatique", "Pilotage complet", "100% solaire", "Installation clé en main", "Surveillance 24/7", "Économie d'eau", "Application mobile incluse", "Garantie 6 mois"] },
 };
 
 function getIcon(feature: string) {
@@ -258,8 +260,6 @@ export default function ProductPage() {
                 Commander →
               </Link>
             </div>
-
-
           </motion.div>
         </div>
       </div>

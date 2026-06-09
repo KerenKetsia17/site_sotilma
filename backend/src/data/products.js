@@ -119,6 +119,7 @@ const products = [
       "Support de fixation inclus",
     ],
   },
+
 ];
 
 module.exports = products;
