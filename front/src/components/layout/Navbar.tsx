@@ -11,11 +11,9 @@ const BLUE = "#1E72B8";
 
 const navLinks = [
   { href: "/",          label: "Accueil"   },
-  // { href: "/expertise", label: "Expertise" },
   { href: "/boutique",  label: "Produit"  },
-  { href: "#",  label: "Business"  },
+  { href: "/contact",  label: "Business"  },
   { href: "/a-propos",  label: "À propos"  },
-  //{ href: "/contact",   label: "Contact"   },
 ];
 
 export default function Navbar() {

@@ -13,13 +13,11 @@ const BORDER = "#E4EEF6";
 const shopLinks = [
   { label: "Vannes automatiques", href: "/boutique?categorie=vanne-automatique" },
   { label: "Caméras agricoles",   href: "/boutique?categorie=camera" },
-  { label: "Sotilma Mobile",      href: "/boutique?categorie=pompe" },
-  { label: "Accessoires",         href: "/boutique?categorie=accessoire" },
+  { label: "Kit pro",      href: "/boutique?categorie=pack" },
 ];
 
 const companyLinks = [
   { label: "À propos",         href: "/a-propos" },
-  { label: "Contact",          href: "/contact" },
   { label: "Mentions légales", href: "#" },
 ];
 

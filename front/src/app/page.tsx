@@ -161,7 +161,7 @@ function HeroText() {
         <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
           className="mb-3 max-w-2xl mx-auto font-semibold"
           style={{ fontSize: "clamp(1.4rem, 3.2vw, 2.4rem)", color: "#FFFFFF", lineHeight: 1.25, letterSpacing: "-0.01em" }}>
-          Automatisez votre exploitation agricole grâce à l&apos;énergie solaire et au contrôle à distance
+          Automatisez votre exploitation agricole grâce au contrôle à distance
         </motion.h1>
         <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }}
           className="mb-6 max-w-lg mx-auto"
@@ -186,147 +186,6 @@ function HeroText() {
           </svg>
         </motion.div>
       </motion.div>
-    </section>
-  );
-}
-
-/* ══════════════════════════════════════════════════════
-   3. NOS SOLUTIONS — grille 3 cartes style Solari section 2
-══════════════════════════════════════════════════════ */
-const CAMERA_SLIDES = ["/c2.png", "/camera V2.png"];
-const VANNE_SLIDES = [
-  "https://static.wixstatic.com/media/75ad33_0bfea267808b4dc0b1cb3a376674b5b3~mv2.png/v1/fill/w_748,h_780,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_0bfea267808b4dc0b1cb3a376674b5b3~mv2.png",
-  "https://static.wixstatic.com/media/75ad33_d3b8626a84fc4e0cad8f3e38a2cf871d~mv2.png/v1/fill/w_749,h_852,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_d3b8626a84fc4e0cad8f3e38a2cf871d~mv2.png",
-  "https://static.wixstatic.com/media/75ad33_7e11dfdbf9d54db99f3fbded4aa4efab~mv2.png/v1/fill/w_748,h_780,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_7e11dfdbf9d54db99f3fbded4aa4efab~mv2.png",
-  "https://static.wixstatic.com/media/75ad33_2469b961487c44acaba3b385b8d04c99~mv2.png/v1/fill/w_749,h_852,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_2469b961487c44acaba3b385b8d04c99~mv2.png",
-  "https://static.wixstatic.com/media/75ad33_460bf654f01c4839ab8df296a9196153~mv2.png/v1/fill/w_748,h_780,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_460bf654f01c4839ab8df296a9196153~mv2.png",
-];
-const ARROSEUR_SLIDES = [
-  "https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png",
-];
-
-function SolutionsGrid() {
-  const ref      = useRef(null);
-  const inView   = useInView(ref, { once: true, margin: "-60px" });
-  const [vanneIdx,    setVanneIdx]    = useState(0);
-  const [arroseurIdx, setArroseurIdx] = useState(0);
-  const [camIdx,      setCamIdx]      = useState(0);
-  const [lightboxSrc, setLightboxSrc] = useState("");
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [v2Idx, setV2Idx] = useState(0);
-
-  const v2Slides = ["/camera V2.png", "/images.jfif"];
-
-  useEffect(() => {
-    const t1 = setInterval(() => setVanneIdx((i)    => (i + 1) % VANNE_SLIDES.length),    3000);
-    const t2 = setInterval(() => setArroseurIdx((i) => (i + 1) % ARROSEUR_SLIDES.length), 2800);
-    const t3 = setInterval(() => setCamIdx((i)      => (i + 1) % CAMERA_SLIDES.length),   3500);
-    const t4 = setInterval(() => setV2Idx((i)       => (i + 1) % v2Slides.length),        3200);
-    return () => { clearInterval(t1); clearInterval(t2); clearInterval(t3); clearInterval(t4); };
-  }, [v2Slides.length]);
-
-  const solutions = [
-    { href: "/boutique?categorie=camera",     label: "Caméra Agricole",    sub: "Surveillance 24/7 de vos cultures",      slides: CAMERA_SLIDES,   activeIdx: camIdx      },
-    { href: "/boutique?categorie=irrigation", label: "Pompe Mobile",        sub: "Système de pompage solaire mobile haute performance pour une agriculture intelligente.", slides: ARROSEUR_SLIDES, activeIdx: arroseurIdx },
-    { href: "/boutique?categorie=vanne",      label: "Vannes connectées",  sub: "Ouvrez et fermez vos vannes à distance, programmez vos arrosages, mesurez votre consommation d'eau. Irrigation automatique.", slides: VANNE_SLIDES,    activeIdx: vanneIdx    },
-  ];
-
-  const v1Feats = ["Pilotable via téléphone","Motorisée 360°","100 % solaire","SIM 4G","Vision nocturne","Garantie 6 mois"];
-  const v2Feats = ["Pilotable avec votre téléphone","Caméra motorisée 360°","Sécurité renforcée","Fonctionne en 100 % solaire","Supporte la carte SIM 4G","Haut-parleurs et micros intégrés","Vision nocturne","Couverture 0 – 1 hectare","Garantie 6 mois"];
-
-  const staticProducts = [
-    { label: "Pompe\nMobile",      sub: "Pompage solaire haute performance",  img: "https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png", contain: true, href: "/boutique?categorie=irrigation" },
-    { label: "Vannes\nConnectées", sub: "Irrigation automatique & pilotable", img: "https://static.wixstatic.com/media/75ad33_0bfea267808b4dc0b1cb3a376674b5b3~mv2.png/v1/fill/w_748,h_780,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/75ad33_0bfea267808b4dc0b1cb3a376674b5b3~mv2.png", contain: true, href: "/boutique?categorie=vanne"      },
-  ];
-
-  const camCarousel = [
-    { img: "/c2.png",        label: "Caméra\nAgricole V1" },
-    { img: "/camera V2.png", label: "Caméra\nAgricole V2" },
-  ];
-
-  return (
-    <section ref={ref} className="py-8" style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
-      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16">
-
-        {/* Titre */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}
-          className="text-center mb-12">
-          <p className="text-xs font-medium tracking-[0.28em] uppercase mb-3" style={{ color: BLUE }}>Nos Solutions</p>
-          <h2 className="font-normal leading-tight mb-2" style={{ fontSize: "clamp(1.9rem, 4.2vw, 3.2rem)", letterSpacing: "-0.02em", color: DARK }}>
-            Des produits pensés pour l&apos;Afrique
-          </h2>
-          <div className="mx-auto mb-4" style={{ width: 52, height: 3, borderRadius: 2, backgroundColor: BLUE }} />
-          <p style={{ color: MID, fontSize: "1rem" }}>Chaque solution est conçue pour fonctionner sans électricité, dans les zones les plus reculées.</p>
-        </motion.div>
-
-        {/* ── Grille 3 cards ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-14">
-
-          {/* Caméra — carrousel V1/V2 */}
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55 }}
-            className="flex flex-col items-center">
-            <Link href="/boutique?categorie=camera" className="group flex flex-col items-center">
-              <div className="mb-3 transition-transform duration-300 group-hover:scale-105 relative"
-                style={{ background: "#CBD5E1", padding: 1, borderRadius: 12 }}>
-                <div className="w-56 h-56 overflow-hidden relative"
-                  style={{ backgroundColor: "#FFF", borderRadius: 10 }}>
-                  <AnimatePresence mode="wait">
-                    <motion.div key={camIdx} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                      transition={{ duration: 0.6 }} className="absolute inset-0">
-                      <Image src={camCarousel[camIdx].img} alt={camCarousel[camIdx].label} fill
-                        className="object-contain p-3" sizes="240px" />
-                    </motion.div>
-                  </AnimatePresence>
-                  {/* Dots */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-10">
-                    {camCarousel.map((_, i) => (
-                      <div key={i} className="rounded-full transition-all duration-300"
-                        style={{ width: i === camIdx ? 14 : 5, height: 5, backgroundColor: i === camIdx ? BLUE : "#CBD5E1" }} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <h3 className="font-bold text-center uppercase leading-tight"
-                style={{ fontSize: "0.75rem", color: DARK, letterSpacing: "0.04em", whiteSpace: "pre-line" }}>
-                {camCarousel[camIdx].label}
-              </h3>
-              <p className="text-center mt-0.5" style={{ fontSize: "0.62rem", color: MID }}>Surveillance 24/7</p>
-            </Link>
-          </motion.div>
-
-          {/* Pompe + Vannes */}
-          {staticProducts.map((p, i) => (
-            <motion.div key={p.label}
-              initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: (i + 1) * 0.1 }}
-              className="flex flex-col items-center">
-              <Link href={p.href} className="group flex flex-col items-center">
-                <div className="mb-3 transition-transform duration-300 group-hover:scale-105"
-                  style={{ background: "#CBD5E1", padding: 1, borderRadius: 12 }}>
-                  <div className="w-56 h-56 flex items-center justify-center overflow-hidden"
-                    style={{ backgroundColor: "#FFF", borderRadius: 10 }}>
-                    <div className="relative w-full h-full">
-                      <Image src={p.img} alt={p.label} fill
-                        className={p.contain ? "object-contain p-3" : "object-cover"} sizes="240px" />
-                    </div>
-                  </div>
-                </div>
-                <h3 className="font-bold text-center uppercase leading-tight"
-                  style={{ fontSize: "0.75rem", color: DARK, letterSpacing: "0.04em", whiteSpace: "pre-line" }}>
-                  {p.label}
-                </h3>
-                <p className="text-center mt-0.5" style={{ fontSize: "0.62rem", color: MID }}>{p.sub}</p>
-              </Link>
-            </motion.div>
-          ))}
-
-        </div>
-
-
-      </div>
-
-      <Lightbox src={lightboxSrc} alt={lightboxSrc} isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
     </section>
   );
 }
@@ -1035,6 +894,16 @@ function CameraAgricoleSection() {
 
   return (
       <section ref={ref} style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
+        {/* Titre */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}
+                    className="text-center mb-12">
+          <p className="text-xs font-medium tracking-[0.28em] uppercase mb-3" style={{ color: BLUE }}>Nos Solutions</p>
+          <h2 className="font-normal leading-tight mb-2" style={{ fontSize: "clamp(1.9rem, 4.2vw, 3.2rem)", letterSpacing: "-0.02em", color: DARK }}>
+            Des produits pensés pour vous
+          </h2>
+          <div className="mx-auto mb-4" style={{ width: 52, height: 3, borderRadius: 2, backgroundColor: BLUE }} />
+          <p style={{ color: MID, fontSize: "1rem" }}>Chaque solution est conçue pour fonctionner sans électricité, dans les zones les plus reculées.</p>
+        </motion.div>
         <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-12">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
 
@@ -1279,7 +1148,7 @@ function PompeMobileSection() {
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <Btn href="/boutique?categorie=pompage">
+                <Btn href="/boutique?categorie=pack">
                   VOIR PLUS
                 </Btn>
               </motion.div>
@@ -1391,7 +1260,7 @@ function VanneConnecterSection() {
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <Btn href="/boutique?categorie=irrigation">
+                <Btn href="/boutique?categorie=vanne">
                   VOIR PLUS
                 </Btn>
               </motion.div>
