@@ -61,45 +61,7 @@ function Btn({ href, children, variant = "solid" }: {
   );
 }
 
-/* ─── Lightbox ────────────────────────────────────────── */
-function Lightbox({ src, alt, isOpen, onClose }: {
-  src: string; alt: string; isOpen: boolean; onClose: () => void;
-}) {
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [isOpen]);
-  useEffect(() => {
-    const fn = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    if (isOpen) window.addEventListener("keydown", fn);
-    return () => window.removeEventListener("keydown", fn);
-  }, [isOpen, onClose]);
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-10"
-          onClick={onClose}>
-          <button onClick={onClose} aria-label="Fermer"
-            className="absolute top-5 right-5 z-[10000] w-10 h-10 rounded-full border border-white/20 hover:bg-white/10 text-white flex items-center justify-center">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-          <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.95, opacity: 0 }} transition={{ duration: 0.25 }}
-            className="relative w-full max-w-5xl h-[80vh]" onClick={(e) => e.stopPropagation()}>
-            <Image src={src} alt={alt} fill className="object-contain" priority sizes="90vw" />
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-/* ══════════════════════════════════════════════════════
-   1. HERO — plein écran style Solari
-══════════════════════════════════════════════════════ */
+// 1. HERO — plein écran style Solari
 function HeroText() {
   return (
     <section className="relative w-full overflow-hidden" style={{ minHeight: "92vh" }}>
@@ -299,24 +261,6 @@ function DesignedForYou() {
   );
 }
 
-/* Image plein écran après "Pourquoi Sotilma" */
-function FullWidthImage() {
-  return (
-    <section className="w-full">
-      <div className="relative w-full" style={{ aspectRatio: "21/9" }}>
-        <Image
-          src="/ac.jpeg"
-          alt="Sotilma image"
-          fill
-          className="object-cover"
-          sizes="100vw"
-          priority
-        />
-      </div>
-    </section>
-  );
-}
-
 /* ══════════════════════════════════════════════════════
    4. SOTILMA MOBILE — style Solari "Our Services"
    Grille 3 cols plein bord : texte | image | texte
@@ -452,420 +396,6 @@ function MobileHero() {
   );
 }
 
-
-/* ══════════════════════════════════════════════════════
-   6. SURVEILLANCE — même style que Pourquoi Sotilma + images caméras
-══════════════════════════════════════════════════════ */
-function SurveillanceSection() {
-  const [v1Idx, setV1Idx]             = useState(0);
-  const [lightboxSrc, setLightboxSrc] = useState("");
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
-  const v1Slides = [
-    "/c2.png",
-    "/WhatsApp Image 2025-01-26 at 19.05.52.jpeg",
-    "/camera-agricole-2.jpg",
-  ];
-
-  const features = [
-    "Pilotable avec votre téléphone",
-    "Caméra motorisée 360°",
-    "Sécurité renforcée",
-    "Fonctionne en 100 % solaire",
-    "Supporte la carte SIM 4G",
-    "Haut-parleurs et micros intégrés",
-    "Vision nocturne",
-    "Couverture 0 – 1 hectare",
-    "Garantie 6 mois",
-  ];
-
-  useEffect(() => {
-    const t = setInterval(() => setV1Idx(p => (p + 1) % v1Slides.length), 3000);
-    return () => clearInterval(t);
-  }, [v1Slides.length]);
-
-  return (
-    <section ref={ref} className="py-8" style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
-      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16">
-
-        {/* Titre */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}
-          className="text-center mb-12">
-          <h2 className="font-normal mb-3" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", letterSpacing: "-0.02em", color: DARK }}>
-            Nos caméras
-          </h2>
-          <div className="mx-auto" style={{ width: 52, height: 3, borderRadius: 2, backgroundColor: BLUE }} />
-        </motion.div>
-
-        {/* 2 fiches côte à côte */}
-        <div className="grid sm:grid-cols-2 gap-8">
-
-          {/* ── V1 ── */}
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="relative rounded-2xl overflow-hidden cursor-zoom-in group"
-            style={{ aspectRatio: "4/3", boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}>
-
-            <AnimatePresence mode="wait">
-              <motion.div key={v1Idx} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }} className="absolute inset-0"
-                onClick={() => { setLightboxSrc(v1Slides[v1Idx]); setLightboxOpen(true); }}>
-                <Image src={v1Slides[v1Idx]} alt="Caméra V1" fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="500px" />
-              </motion.div>
-            </AnimatePresence>
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 pointer-events-none"
-              style={{ background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)" }}>
-              <span className="text-white text-sm font-semibold">Caméra V1</span>
-            </div>
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-              {v1Slides.map((_, i) => (
-                <button key={i} onClick={e => { e.stopPropagation(); setV1Idx(i); }}
-                  className="rounded-full transition-all duration-300"
-                  style={{ width: i === v1Idx ? 16 : 6, height: 6, backgroundColor: i === v1Idx ? "#FFF" : "rgba(255,255,255,0.5)" }} />
-              ))}
-            </div>
-          </motion.div>
-
-          {/* ── V2 ── */}
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative rounded-2xl overflow-hidden cursor-zoom-in group"
-            style={{ aspectRatio: "4/3", boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}
-            onClick={() => { setLightboxSrc("/camera-agricole-1.jpg"); setLightboxOpen(true); }}>
-            <Image src="/camera-agricole-1.jpg" alt="Caméra V2" fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="500px" />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4"
-              style={{ background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)" }}>
-              <span className="text-white text-sm font-semibold">Caméra V2</span>
-            </div>
-          </motion.div>
-
-        </div>
-      </div>
-
-      <Lightbox src={lightboxSrc} alt={lightboxSrc} isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
-    </section>
-  );
-}
-
-/* ══════════════════════════════════════════════════════
-   7. APP BANNER
-══════════════════════════════════════════════════════ */
-function AppBanner() {
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <motion.section ref={ref} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7 }} className="w-full overflow-hidden" style={{ borderTop: "1px solid #E8ECF1" }}>
-      <div className="relative w-full" style={{ aspectRatio: "1540/780" }}>
-        <Image src="/app-banner.jpg" alt="Votre ferme dans votre poche" fill className="object-cover" sizes="100vw" priority />
-      </div>
-    </motion.section>
-  );
-}
-
-
-/* ─── Image Carousel Component ─────────────────────────── */
-function ImageCarousel({ images, label }: { images: string[], label: string }) {
-  const [currentIndex, setCurrentIndex] = useState(0); // Carousel with auto-transition
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [images.length]);
-
-  return (
-    <div className="relative w-full h-full">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="absolute inset-0"
-        >
-          <Image
-            src={images[currentIndex]}
-            alt={`${label} ${currentIndex + 1}`}
-            fill
-            className="object-cover"
-            sizes="600px"
-          />
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Indicateurs de position */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-        {images.map((_, idx) => (
-          <div
-            key={idx}
-            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-              idx === currentIndex ? "bg-white" : "bg-white/40"
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* ══════════════════════════════════════════════════════
-   SHOWCASE CAROUSEL — style Solari "Unlimited Page Layouts"
-   Carrousel 3D en éventail : carte centrale grande + cartes
-   latérales réduites et décalées derrière
-══════════════════════════════════════════════════════ */
-function ShowcaseCarousel() {
-  const [active, setActive]           = useState(0);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxImage, setLightboxImage] = useState("");
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
-  const slides = [
-    {
-      label: "Vanne Sotilma",
-      sub:   "Irrigation connectée & automatique",
-      img:   "/PHOTO-2025-01-30-16-11-59 (1).jpg",
-      cover: true,
-    },
-    {
-      label: "Caméra Agricole",
-      sub:   "Surveillance 24/7 de vos cultures",
-      img:   "/camera-agricole-1.jpg",
-      cover: true,
-    },
-    {
-      label: "Caméra Agricole V1",
-      sub:   "Surveillance 24/7 de vos cultures",
-      img:   "/camera-agricole-2.jpg",
-      cover: true,
-    },
-  ];
-
-  /* Rotation fixe et permanente de chaque carte */
-  const TILTS = [-8, 8, -6];
-
-  useEffect(() => {
-    const t = setInterval(() => setActive(p => (p + 1) % slides.length), 3800);
-    return () => clearInterval(t);
-  }, [slides.length]);
-
-  const getAnim = (i: number) => {
-    const isActive = i === active;
-    const side = i === 0 ? -1 : 1;
-    return {
-      x:       isActive ? 0   : side * 80,
-      y:       isActive ? 0   : 30,
-      scale:   isActive ? 1   : 0.82,
-      opacity: isActive ? 1   : 0.62,
-      zIndex:  isActive ? 10  : 4,
-      rotate:  isActive ? 0   : TILTS[i],
-    };
-  };
-
-  return (
-    <section ref={ref} className="py-8 overflow-hidden" style={{ backgroundColor: "white", borderTop: "1px solid #E8ECF1" }}>
-      <div className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16">
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}>
-          <SectionHeading label="Plus d'informations" title="" />
-        </motion.div>
-
-        {/* Carrousel 2 cartes inclinées */}
-        <div className="relative flex justify-center items-center" style={{ height: 600 }}>
-          {slides.map((s, i) => {
-            const anim = getAnim(i);
-            return (
-              <motion.div
-                key={s.label}
-                animate={{ x: anim.x, y: anim.y, scale: anim.scale, opacity: anim.opacity, zIndex: anim.zIndex, rotate: anim.rotate }}
-                transition={{ duration: 0.78, ease: [0.22, 1, 0.36, 1] }}
-                style={{ position: "absolute", width: 380, cursor: "pointer" }}
-                onClick={() => { setActive(i); setLightboxImage(s.img); setLightboxOpen(true); }}
-              >
-                <div className="relative rounded-2xl overflow-hidden"
-                  style={{
-                    aspectRatio: "3/4",
-                    boxShadow: i === active
-                      ? "0 24px 56px rgba(0,0,0,0.22), 0 6px 16px rgba(0,0,0,0.10)"
-                      : "0 6px 20px rgba(0,0,0,0.10)",
-                    border: "1px solid #E8ECF1",
-                    transition: "box-shadow 0.5s",
-                  }}>
-                  <Image src={s.img} alt={s.label} fill
-                    className={s.cover ? "object-cover" : "object-contain p-4"} sizes="260px" />
-                  <div className="absolute bottom-0 left-0 right-0 px-4 py-3">
-                    <p className="font-semibold" style={{ fontSize: "0.9rem", color: DARK }}>{s.label}</p>
-                    <p style={{ fontSize: "0.72rem", color: MID }}>{s.sub}</p>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Dots */}
-        <div className="flex justify-center gap-2 mt-2">
-          {slides.map((_, i) => (
-            <button key={i} onClick={() => setActive(i)}
-              className="rounded-full transition-all duration-300"
-              style={{ width: i === active ? 22 : 8, height: 8, backgroundColor: i === active ? BLUE : "#CDD6E0" }} />
-          ))}
-        </div>
-
-      </div>
-
-      <Lightbox src={lightboxImage} alt={lightboxImage ? slides.find(s => s.img === lightboxImage)?.label ?? "" : ""}
-        isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
-    </section>
-  );
-}
-
-/* ══════════════════════════════════════════════════════
-   9. SOLUTIONS BANNER
-══════════════════════════════════════════════════════ */
-function SolutionsBanner() {
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <motion.section ref={ref} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7 }} className="w-full overflow-hidden" style={{ borderTop: "1px solid #E8ECF1" }}>
-      <div className="relative w-full" style={{ aspectRatio: "16/5" }}>
-        <Image src="/solutions-banner.jpg" alt="Gérer votre eau, notre priorité — Sotilma"
-          fill className="object-cover" sizes="100vw" />
-      </div>
-    </motion.section>
-  );
-}
-
-
-/* ══════════════════════════════════════════════════════
-   FAQ — style Solari : accordéon fond gris + cercle "+"
-══════════════════════════════════════════════════════ */
-function FaqSection() {
-  const [open, setOpen] = useState<number | null>(null);
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
-  const items = [
-    {
-      q: "Comment fonctionne la vanne connectée Sotilma ?",
-      a: "La vanne Sotilma se connecte à votre réseau Wi-Fi ou GSM et se pilote depuis l'application mobile. Vous pouvez ouvrir, fermer, programmer et surveiller votre consommation d'eau en temps réel, depuis n'importe où.",
-    },
-    {
-      q: "Les équipements fonctionnent-ils sans électricité du réseau ?",
-      a: "Oui. Tous nos produits sont conçus pour fonctionner à l'énergie solaire. Panneaux photovoltaïques intégrés ou dédiés — aucune dépendance au réseau électrique classique.",
-    },
-    {
-      q: "Comment installer le Sotilma Mobile sur mon exploitation ?",
-      a: "Le Sotilma Mobile est livré prêt à l'emploi avec son châssis roulant. Une équipe technique Sotilma peut assurer l'installation et la mise en service sur site. Contactez-nous pour organiser une intervention.",
-    },
-    {
-      q: "Comment obtenir un devis ou une démonstration ?",
-      a: "Remplissez notre formulaire de contact ou écrivez-nous sur WhatsApp. Nous revenons vers vous sous 24 heures ouvrées avec un devis personnalisé adapté à votre exploitation.",
-    },
-  ];
-
-  return (
-    <section ref={ref} className="py-10 bg-white" style={{ borderTop: "1px solid #E8ECF1" }}>
-      <div className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16">
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}>
-          <SectionHeading
-            title="Une question ?"
-            subtitle="Parcourez la FAQ ci-dessous ou contactez notre support pour en savoir plus sur Sotilma."
-          />
-        </motion.div>
-
-        <div className="space-y-3">
-          {items.map((item, i) => (
-            <motion.div key={i}
-              initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.45, delay: i * 0.08 }}>
-
-              {/* Item accordion — style Solari */}
-              <div className="rounded-xl overflow-hidden" style={{ backgroundColor: "#F8F9FA", border: "1px solid #E8ECF1" }}>
-                <button
-                  className="w-full flex items-center justify-between px-7 py-5 text-left group"
-                  onClick={() => setOpen(open === i ? null : i)}>
-                  <span className="font-normal pr-6" style={{ fontSize: "1rem", color: DARK }}>
-                    {item.q}
-                  </span>
-                  {/* Cercle "+" style Solari */}
-                  <div className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300"
-                    style={{ backgroundColor: open === i ? BLUE : `${BLUE}22`, color: open === i ? "#FFF" : BLUE }}>
-                    <svg className="w-4 h-4 transition-transform duration-300" style={{ transform: open === i ? "rotate(45deg)" : "rotate(0)" }}
-                      fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
-                    </svg>
-                  </div>
-                </button>
-
-                <AnimatePresence>
-                  {open === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="overflow-hidden">
-                      <p className="px-7 pb-5 text-sm leading-relaxed" style={{ color: MID, lineHeight: 1.8 }}>
-                        {item.a}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-            </motion.div>
-          ))}
-        </div>
-
-      </div>
-    </section>
-  );
-}
-
-// CTA FINAL
-function CtaFinal() {
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  return (
-    <section ref={ref} style={{ background: `linear-gradient(135deg, #0C2340 0%, ${BLUE} 100%)`, borderTop: "1px solid #E8ECF1" }}>
-      <div className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 py-12 text-center">
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}>
-          <p className="text-xs font-medium tracking-[0.28em] uppercase mb-4" style={{ color: "rgba(255,255,255,0.6)" }}>
-            Sotilma
-          </p>
-          <h2 className="font-normal leading-tight mb-4 text-white"
-            style={{ fontSize: "clamp(1.9rem, 4.5vw, 3.4rem)", letterSpacing: "-0.02em" }}>
-            Prêt à moderniser<br />votre exploitation&nbsp;?
-          </h2>
-          <div className="mx-auto mb-8" style={{ width: 52, height: 3, borderRadius: 2, backgroundColor: "rgba(255,255,255,0.45)" }} />
-          <p className="mx-auto max-w-lg mb-10" style={{ color: "rgba(255,255,255,0.72)", fontSize: "1rem", lineHeight: 1.85 }}>
-            Rejoignez les agriculteurs africains qui pilotent déjà leur exploitation depuis leur smartphone grâce aux solutions Sotilma.
-          </p>
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.25 }}
-            className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact"
-              className="inline-flex items-center gap-2 font-medium text-sm px-8 py-3.5 rounded-full tracking-wide transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
-              style={{ backgroundColor: "#FFF", color: BLUE }}>
-              Demander un devis
-            </Link>
-            <Link href="/boutique"
-              className="inline-flex items-center gap-2 font-medium text-sm px-8 py-3.5 rounded-full tracking-wide transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
-              style={{ border: "2px solid rgba(255,255,255,0.7)", color: "#FFF" }}>
-              Acheter maintenant
-            </Link>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
 // WhatsApp FAB
 function WhatsAppFab() {
   return (
@@ -880,6 +410,7 @@ function WhatsAppFab() {
     </a>
   );
 }
+
 
 // CAMERA SOTILMA — section accueil
 function CameraAgricoleSection() {
@@ -941,57 +472,45 @@ function CameraAgricoleSection() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="flex items-center justify-center whitespace-nowrap mb-8"
+                  className="mb-8 w-full"
               >
-                {specs.map((s, i) => (
-                    <div
-                        key={s.label}
-                        className="flex items-center gap-3 px-4 sm:px-6 py-3"
-                        style={{
-                          borderRight:
-                              i < specs.length - 1
-                                  ? "1px solid #DDE6F0"
-                                  : "none",
-                        }}
-                    >
-                      <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
+                <div className="flex flex-col gap-3 lg:flex-row lg:justify-center">
+                  {specs.map((s) => (
+                      <div
+                          key={s.label}
+                          className="flex items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3 lg:flex-1 lg:justify-start lg:rounded-none lg:border-0 lg:border-r lg:bg-transparent lg:px-6 lg:py-3"
+                      >
+                        <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
 
-                      <div className="text-left">
-                        <p
-                            className="font-semibold uppercase"
-                            style={{
-                              fontSize: "0.65rem",
-                              color: "#5A6B7A",
-                              letterSpacing: "0.1em",
-                            }}
-                        >
-                          {s.label}
-                        </p>
+                        <div className="text-left">
+                          <p
+                              className="font-semibold uppercase"
+                              style={{
+                                fontSize: "0.65rem",
+                                color: "#5A6B7A",
+                                letterSpacing: "0.1em",
+                              }}
+                          >
+                            {s.label}
+                          </p>
 
-                        <p
-                            className="font-black"
-                            style={{
-                              fontSize: "0.95rem",
-                              color: "#111827",
-                            }}
-                        >
-                          {s.value}
-                        </p>
+                          <p
+                              className="font-black"
+                              style={{
+                                fontSize: "0.95rem",
+                                color: "#111827",
+                              }}
+                          >
+                            {s.value}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                ))}
+                  ))}
+                </div>
               </motion.div>
-
-              {/* CTA */}
-              <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-              >
                 <Btn href="/boutique?categorie=camera">
                   VOIR PLUS
                 </Btn>
-              </motion.div>
 
             </div>
 
@@ -1000,13 +519,11 @@ function CameraAgricoleSection() {
                 initial={{ opacity: 0, x: 30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex justify-center items-center lg:order-last order-first"
+                className="flex w-full justify-center items-center order-first lg:order-last"
             >
               <div
-                  className="relative"
+                  className="relative w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px]"
                   style={{
-                    width: "70%",
-                    maxWidth: 380,
                     aspectRatio: "4/3",
                   }}
               >
@@ -1048,13 +565,11 @@ function PompeMobileSection() {
                 initial={{ opacity: 0, x: -30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex justify-center items-center"
+                className="flex w-full justify-center items-center"
             >
               <div
-                  className="relative"
+                  className="relative w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px]"
                   style={{
-                    width: "70%",
-                    maxWidth: 380,
                     aspectRatio: "4/3",
                   }}
               >
@@ -1098,51 +613,47 @@ function PompeMobileSection() {
                 </p>
               </motion.div>
 
-              {/* Specs — MODIFIÉ : Ajout du même style bloqué sur une seule ligne */}
+              {/* Specs */}
               <motion.div
                   initial={{ opacity: 0, y: 16 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="flex items-center justify-center whitespace-nowrap mb-8"
+                  className="mb-8 w-full"
               >
-                {specs.map((s, i) => (
-                    <div
-                        key={s.label}
-                        className="flex items-center gap-3 px-4 sm:px-6 py-3"
-                        style={{
-                          borderRight:
-                              i < specs.length - 1
-                                  ? "1px solid #DDE6F0"
-                                  : "none",
-                        }}
-                    >
-                      <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
-                      <div className="text-left">
-                        <p
-                            className="font-semibold uppercase"
-                            style={{
-                              fontSize: "0.65rem",
-                              color: "#5A6B7A",
-                              letterSpacing: "0.1em",
-                            }}
-                        >
-                          {s.label}
-                        </p>
-                        <p
-                            className="font-black"
-                            style={{
-                              fontSize: "0.95rem",
-                              color: "#111827",
-                            }}
-                        >
-                          {s.value}
-                        </p>
+                <div className="flex flex-col gap-3 lg:flex-row lg:justify-center">
+                  {specs.map((s) => (
+                      <div
+                          key={s.label}
+                          className="flex items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3 lg:flex-1 lg:justify-start lg:rounded-none lg:border-0 lg:border-r lg:bg-transparent lg:px-6 lg:py-3"
+                      >
+                        <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
+                        <div className="text-left">
+                          <p
+                              className="font-semibold uppercase"
+                              style={{
+                                fontSize: "0.65rem",
+                                color: "#5A6B7A",
+                                letterSpacing: "0.1em",
+                              }}
+                          >
+                            {s.label}
+                          </p>
+                          <p
+                              className="font-black"
+                              style={{
+                                fontSize: "0.95rem",
+                                color: "#111827",
+                              }}
+                          >
+                            {s.value}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                ))}
+                  ))}
+                </div>
               </motion.div>
 
-              {/* CTA — AJOUTÉ : Bloc bouton identique et centré */}
+              {/* CTA */}
               <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -1174,12 +685,13 @@ function VanneConnecterSection() {
 
   return (
       <section ref={ref} style={{ backgroundColor: "#FFF", borderTop: "1px solid #E8ECF1" }}>
-        {/* MODIFIÉ : Ajout du même conteneur global que la Caméra */}
         <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-12">
+          {/* Conteneur principal en Grille */}
           <div className="grid lg:grid-cols-2 gap-10 items-center">
 
-            {/* Texte */}
-            <div className="flex flex-col items-center text-center">
+            {/* 1. Bloc Contenu (Header + Specs) */}
+            {/* order-1: s'affiche en premier sur mobile */}
+            <div className="flex flex-col items-center text-center order-1 lg:order-none">
 
               {/* Header */}
               <motion.div
@@ -1199,7 +711,6 @@ function VanneConnecterSection() {
                   Vanne Sotilma
                 </h2>
 
-                {/* MODIFIÉ : Ajout du mt-2 identique à la caméra */}
                 <p
                     className="font-semibold tracking-[0.18em] uppercase text-xs mt-2"
                     style={{ color: "#5A6B7A" }}
@@ -1213,48 +724,43 @@ function VanneConnecterSection() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="flex items-center justify-center whitespace-nowrap mb-8"
+                  className="mb-8 w-full"
               >
-                {specs.map((s, i) => (
-                    <div
-                        key={s.label}
-                        className="flex items-center gap-3 px-4 sm:px-6 py-3"
-                        style={{
-                          borderRight:
-                              i < specs.length - 1
-                                  ? "1px solid #DDE6F0"
-                                  : "none",
-                        }}
-                    >
-                      <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
+                <div className="flex flex-col gap-3 lg:flex-row lg:justify-center">
+                  {specs.map((s) => (
+                      <div
+                          key={s.label}
+                          className="flex items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3 lg:flex-1 lg:justify-start lg:rounded-none lg:border-0 lg:border-r lg:bg-transparent lg:px-6 lg:py-3"
+                      >
+                        <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
 
-                      <div className="text-left">
-                        <p
-                            className="font-semibold uppercase"
-                            style={{
-                              fontSize: "0.65rem",
-                              color: "#5A6B7A",
-                              letterSpacing: "0.1em",
-                            }}
-                        >
-                          {s.label}
-                        </p>
+                        <div className="text-left">
+                          <p
+                              className="font-semibold uppercase"
+                              style={{
+                                fontSize: "0.65rem",
+                                color: "#5A6B7A",
+                                letterSpacing: "0.1em",
+                              }}
+                          >
+                            {s.label}
+                          </p>
 
-                        <p
-                            className="font-black"
-                            style={{
-                              fontSize: "0.95rem",
-                              color: "#111827",
-                            }}
-                        >
-                          {s.value}
-                        </p>
+                          <p
+                              className="font-black"
+                              style={{
+                                fontSize: "0.95rem",
+                                color: "#111827",
+                              }}
+                          >
+                            {s.value}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                ))}
+                  ))}
+                </div>
               </motion.div>
 
-              {/* CTA */}
               <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -1267,17 +773,17 @@ function VanneConnecterSection() {
 
             </div>
 
-            {/* Image */}
+            {/* 2. Bloc Image de la Vanne */}
+            {/* order-2: se place au milieu (sous les specs) sur mobile */}
             <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex justify-center items-center">
+                className="flex w-full justify-center items-center order-2 lg:order-none"
+            >
               <div
-                  className="relative"
+                  className="relative w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px]"
                   style={{
-                    width: "70%",
-                    maxWidth: 380,
                     aspectRatio: "4/3",
                   }}
               >
@@ -1290,18 +796,23 @@ function VanneConnecterSection() {
                     priority
                 />
               </div>
+
             </motion.div>
+
           </div>
+
+          {/* 4. Bloc Flyer commercial (Plein écran en dessous) */}
           <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex justify-center items-center w-full h-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex justify-center items-center w-full h-full mt-16"
           >
             <div
                 className="relative w-full"
                 style={{
-                  aspectRatio: "4/3", // Ajustez l'aspectRatio (ex: "1/1" ou "16/9") selon la forme réelle de votre flyer
+                  aspectRatio: "16/9", // Format paysage idéal pour occuper l'espace en dessous de la grille
+                  maxWidth: "1000px"
                 }}
             >
               <Image
@@ -1309,16 +820,16 @@ function VanneConnecterSection() {
                   alt="Sotilma — Flyer commercial"
                   fill
                   className="object-contain w-full h-full"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 100vw, 80vw"
                   priority
               />
             </div>
           </motion.div>
         </div>
-
       </section>
   );
 }
+
 
 /* ── PAGE ─────────────────────────────────────────────── */
 export default function HomePage() {
@@ -1327,11 +838,9 @@ export default function HomePage() {
       <HeroText />
       <DesignedForYou />
       <MobileHero />
-      {/*<SolutionsGrid />*/}
       <CameraAgricoleSection/>
       <PompeMobileSection />
       <VanneConnecterSection />
-      {/*<ShowcaseCarousel />*/}
       <WhatsAppFab />
     </>
   );

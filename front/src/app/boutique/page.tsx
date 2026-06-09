@@ -45,7 +45,7 @@ const categories = [
 
 const promos = [
   { label: "CAMÉRAS SOTILMA",      sub: "À PARTIR DE 105 000 CFA", btn: "Voir les caméras", cat: "camera", bg: "https://static.wixstatic.com/media/75ad33_2b84b31e551f42e8ba634f3823910159~mv2.png" },
-  { label: "POMPE SOTILMA MOBILE",    sub: "TOUT-EN-UN",               btn: "Voir les packs",   cat: "pack",   bg: "https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png" },
+  { label: "POMPE SOTILMA ",    sub: "TOUT-EN-UN",               btn: "Voir les packs",   cat: "pack",   bg: "https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png" },
   { label: "VANNES SOTILMA", sub: "À PARTIR DE 180 000 CFA", btn: "Voir les vannes",  cat: "vanne",  bg: "https://static.wixstatic.com/media/75ad33_82b826c91cd44c88954123ab55cbc531~mv2.jpg" },
 ];
 
