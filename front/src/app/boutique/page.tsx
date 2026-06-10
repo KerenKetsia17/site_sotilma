@@ -32,7 +32,7 @@ const products: Product[] = [
   { id: "sotilma-mobile-sm01",          name: "Sotilma Mobile SM-01 Simple",          description: "Pompe de surface solaire mobile. Puissance 1890W, débit 45 m³/h.", price: 975000, image: "https://static.wixstatic.com/media/75ad33_5ae75292849c40308616364b4b782980~mv2.png", category: "pack" },
 ];
 
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 6;
 
 const categories = [
   { id: "tous",         label: "Tous les produits" },

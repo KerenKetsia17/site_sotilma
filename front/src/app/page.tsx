@@ -63,9 +63,53 @@ function Btn({ href, children, variant = "solid" }: {
 
 // 1. HERO — plein écran style Solari
 function HeroText() {
+  const heroSlides = [
+    { src: "/arriere plan/1.png", alt: "Arrière-plan produit SOTILMA" },
+    { src: "/arriere plan/ac.jpeg", alt: "Arrière-plan produit SOTILMA" },
+    { src: "/arriere plan/c1.jpeg", alt: "Arrière-plan produit SOTILMA" },
+    { src: "/arriere plan/camera-produit.jpg", alt: "Arrière-plan produit SOTILMA" },
+    { src: "/arriere plan/Capture d’écran 2026-06-03 132419.png", alt: "Arrière-plan produit SOTILMA" },
+    { src: "/arriere plan/flyer.jpeg", alt: "Arrière-plan produit SOTILMA" },
+    { src: "/arriere plan/QT-02T图六.png", alt: "Arrière-plan produit SOTILMA" },
+    { src: "/arriere plan/sm1.jpeg", alt: "Arrière-plan produit SOTILMA" },
+    { src: "/arriere plan/v2.jpeg", alt: "Arrière-plan produit SOTILMA" },
+    { src: "/arriere plan/白底球阀2 - 副本.jpg", alt: "Arrière-plan produit SOTILMA" },
+  ];
+
+  const [activeImage, setActiveImage] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveImage((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+
+    return () => window.clearInterval(interval);
+  }, [heroSlides.length]);
+
   return (
     <section className="relative w-full overflow-hidden" style={{ minHeight: "92vh" }}>
-      <Image src="/app-banner.jpg" alt="Sotilma" fill className="object-cover object-center" sizes="100vw" priority />
+      <div className="absolute inset-0 overflow-hidden">
+        {heroSlides.map((slide, index) => (
+          <motion.div
+            key={slide.src}
+            className="absolute inset-0"
+            initial={false}
+            animate={{
+              opacity: index === activeImage ? 1 : 0,
+              scale: index === activeImage ? 1 : 1.08,
+            }}
+            transition={{ duration: 1.1, ease: "easeInOut" }}>
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              className="object-cover object-center"
+              sizes="100vw"
+              priority={index === 0}
+            />
+          </motion.div>
+        ))}
+      </div>
       <div className="absolute inset-0"
         style={{ background: "linear-gradient(to bottom,rgba(5,20,40,.52) 0%,rgba(5,20,40,.65) 60%,rgba(5,20,40,.72) 100%)" }} />
 
@@ -410,7 +454,6 @@ function WhatsAppFab() {
     </a>
   );
 }
-
 
 // CAMERA SOTILMA — section accueil
 function CameraAgricoleSection() {
