@@ -99,11 +99,12 @@ function HeroText() {
               scale: index === activeImage ? 1 : 1.08,
             }}
             transition={{ duration: 1.1, ease: "easeInOut" }}>
+            <div className="absolute inset-0 bg-slate-950/20" />
             <Image
               src={slide.src}
               alt={slide.alt}
               fill
-              className="object-cover object-center"
+              className="object-contain object-center"
               sizes="100vw"
               priority={index === 0}
             />
